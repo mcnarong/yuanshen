@@ -21,6 +21,7 @@ public final class Yuanshen extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AnemoElementListener(this), this);
         getServer().getPluginManager().registerEvents(new GeoElementListener(this), this);
         getServer().getPluginManager().registerEvents(new DendroElementListener(this), this);
+        new reload(this);
         
         // 3. 打印启用日志
         getLogger().info("=== 原神元素反应插件已启用 ===");
