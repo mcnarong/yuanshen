@@ -1,0 +1,10 @@
+name: yuanshen
+version: '1.0-SNAPSHOT'
+main: org.yuanshen.yuanshen.Yuanshen
+api-version: '1.21'
+commands:
+  yuanshen:
+    description: 原神元素插件指令
+    usage: /<command> reload
+    permission: yuanshen.reload
+    permission-message: §c你没有权限使用此指令！
