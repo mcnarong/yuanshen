@@ -1,0 +1,259 @@
+config-version: '2.1-character'
+enabled: true
+
+meta:
+  character-id: 'hutao'
+  display-name: '胡桃'
+  element: 'element_fire'
+  weapon-type: 'polearm'
+  material: 'NETHER_STAR'
+  rarity: 5
+  default-level: 90
+  max-level: 90
+  aliases:
+    - '胡桃'
+  tags:
+    - '火系'
+    - '长枪角色'
+    - 'pyro'
+    - 'polearm'
+    - '胡桃'
+
+stats:
+  base-attack: 106
+  base-health: 15552
+  base-defense: 876
+  crit-damage: 0.384
+
+combat:
+  normal:
+    combo-reset-ms: 1500
+    attachment:
+      group: normal
+      aura: 1.0
+    segments:
+      - 0.47
+      - 0.49
+      - 0.61
+      - 0.67
+      - 0.36
+      - 0.79
+
+item:
+  material: 'NETHER_STAR'
+  display-name: '&6{character_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神角色'
+    - '&7元素: &f{element}'
+    - '&7武器: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7命座: &f{constellation}'
+    - ''
+    - '&7基础攻击: &f{base_attack}'
+    - '&7基础生命: &f{base_health}'
+    - '&7基础防御: &f{base_defense}'
+
+notifications:
+  e-activated: true
+  e-ended: true
+  energy-after-e: false
+  q-cast: true
+  q-summary: true
+  q-hit-count: false
+  q-heal: false
+  blood-blossom-apply: true
+  blood-blossom-refresh: false
+  blood-blossom-tick: false
+  passive-team-crit: true
+  skill-damage-feedback: false
+
+e:
+  enabled: true
+  cooldown-ms: 16000
+  attachment:
+    group: e
+    aura: 1.0
+  hp-cost-current-percent: 0.30
+  duration-ticks: 180
+  hp-to-bonus-damage-ratio: 0.0384
+  max-bonus-cap-ratio: 4.0
+  low-hp-threshold: 0.50
+  low-hp-pyro-bonus: 0.33
+  energy-gain: 0
+  interruption-resistance:
+    enabled: true
+    horizontal-factor: 0.25
+    vertical-factor: 0.55
+  knockback:
+    enabled: true
+    radius: 3.5
+    strength: 0.8
+    vertical: 0.25
+  visual:
+    activate:
+      enabled: true
+      ring-particle: 'SOUL_FIRE_FLAME'
+      burst-particle: 'FLAME'
+      accent-particle: 'CRIMSON_SPORE'
+      low-hp-particle: 'LAVA'
+      ring-count: 18
+      burst-count: 22
+      accent-count: 10
+      low-hp-count: 6
+      ring-radius: 1.25
+      sound: 'ENTITY_BLAZE_SHOOT'
+      sound-volume: 1.0
+      sound-pitch: 0.8
+
+passive:
+  team-crit-rate-bonus: 0.12
+  team-crit-duration-ticks: 160
+
+charged:
+  enabled: true
+  require-sneaking: true
+  attachment:
+    group: charged
+    aura: 1.0
+  cooldown-ms: 1000
+  hunger-cost: 2
+  hit-window-ticks: 14
+  auto-hit-range: 4.0
+  auto-hit-cone-degrees: 110.0
+  damage-multiplier: 2.0
+  path-length: 4.0
+  path-radius: 1.15
+  max-targets: 6
+  targeting:
+    enabled: true
+    max-distance: 5.0
+    min-distance-for-raycast: 3.2
+    hitbox-expand: 0.45
+  dash:
+    enabled: true
+    strength: 1.1
+    vertical: 0.12
+    direct-to-target: true
+    direct-range: 5.0
+    stop-distance: 0.8
+    distance-multiplier: 0.55
+    max-strength: 2.0
+    target-assist-ratio: 0.45
+    start-particle: 'FLAME'
+    burst-ticks: 3
+    burst-decay: 0.85
+    spin-effect:
+      enabled: true
+      sound: 'ITEM_TRIDENT_RIPTIDE_1'
+      sound-volume: 0.9
+      sound-pitch: 1.15
+      particle: 'SWEEP_ATTACK'
+      secondary-particle: 'CLOUD'
+      accent-particle: 'FLAME'
+      radius: 0.85
+      points: 6
+      vertical-step: 0.16
+
+blood-blossom:
+  enabled: true
+  element: 'element_fire'
+  attachment:
+    group: blood_blossom
+    aura: 1.0
+  duration-ticks: 160
+  interval-ticks: 80
+  aura-duration: 120
+  damage-multiplier: 0.64
+  extra-flat-damage: 0.0
+  extra-max-health-ratio: 0.0
+  extra-damage-multiplier: 1.0
+  visual:
+    apply:
+      enabled: true
+      particle: 'SOUL_FIRE_FLAME'
+      secondary-particle: 'CRIMSON_SPORE'
+      count: 12
+      secondary-count: 8
+      sound: 'BLOCK_FIRE_EXTINGUISH'
+      sound-volume: 0.65
+      sound-pitch: 1.15
+    indicator:
+      enabled: true
+      period-ms: 350
+      particle: 'SOUL_FIRE_FLAME'
+      secondary-particle: 'CRIMSON_SPORE'
+      radius: 0.65
+      y-offset: 1.0
+      secondary-count: 2
+    tick:
+      particle: 'FLAME'
+      secondary-particle: 'SMOKE'
+      count: 10
+      secondary-count: 6
+      sound: 'BLOCK_FIRE_AMBIENT'
+      sound-volume: 0.7
+      sound-pitch: 1.3
+
+q:
+  enabled: true
+  cooldown-ms: 15000
+  attachment:
+    group: q
+    aura: 1.0
+  energy-cost: 60
+  element: 'element_fire'
+  aura-duration: 200
+  radius: 5.0
+  damage-multiplier: 1.0
+  low-hp-damage-bonus: 0.33
+  heal-percent-per-target: 0.04
+  low-hp-heal-bonus: 0.25
+  max-heal-targets: 5
+  visual:
+    cast:
+      enabled: true
+      ring-particle: 'SOUL_FIRE_FLAME'
+      burst-particle: 'FLAME'
+      ring-count: 20
+      burst-count: 24
+      ring-radius: 1.6
+      sound: 'ENTITY_BLAZE_SHOOT'
+      sound-volume: 1.0
+      sound-pitch: 0.9
+    impact:
+      enabled: true
+      particle: 'FLAME'
+      secondary-particle: 'LAVA'
+      count: 14
+      secondary-count: 4
+      sound: 'ENTITY_GENERIC_EXPLODE'
+      sound-volume: 0.55
+      sound-pitch: 1.15
+    heal:
+      enabled: true
+      particle: 'HEART'
+      secondary-particle: 'CHERRY_LEAVES'
+      count: 4
+      secondary-count: 8
+      sound: 'ENTITY_EXPERIENCE_ORB_PICKUP'
+      sound-volume: 0.8
+      sound-pitch: 1.35
+
+messages:
+  e-activated: '&6[胡桃] 已进入彼岸蝶舞状态，当前生命 &f{health}&6/&f{max_health}&6，额外伤害 &c{bonus_damage}&6。'
+  e-ended: '&7[胡桃] 彼岸蝶舞状态已结束。'
+  e-cooldown: '&c[胡桃] E 冷却中，还剩 {time} 秒。'
+  energy: '&7[胡桃] 当前能量：&f{energy}&7/&f{max_energy}'
+  q-cast: '&c[胡桃] 释放元素爆发。'
+  q-cooldown: '&c[胡桃] Q 冷却中，还剩 {time} 秒。'
+  q-no-energy: '&c[胡桃] Q 所需能量不足，当前 {energy}/{max_energy}。'
+  q-summary: '&c[胡桃] 元素爆发命中 &f{count}&c 个目标，恢复了 &a{heal}&c 点生命值。'
+  q-hit-count: '&7[胡桃] 元素爆发命中目标数：&f{count}'
+  q-heal: '&a[胡桃] 元素爆发恢复了 &f{heal}&a 点生命值。'
+  charged-cooldown: '&c[胡桃] 重击冷却中，还剩 {time} 秒。'
+  charged-no-hunger: '&c[胡桃] 饥饿值不足，无法施放重击。'
+  blood-blossom-apply: '&c[胡桃] 已对 &f{target}&c 附加血梅香。'
+  blood-blossom-refresh: '&c[胡桃] 已刷新 &f{target}&c 的血梅香持续时间。'
+  blood-blossom-tick: '&6[血梅香] &f{target}&e 受到 &c{damage}&e 点火元素伤害。'
+  passive-team-crit: '&d[胡桃] 蝶隐之时触发，其他角色暴击率提升 &f{crit_rate}&d，持续 &f{duration}&d 秒。'

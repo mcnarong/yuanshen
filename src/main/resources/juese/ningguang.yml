@@ -1,0 +1,123 @@
+config-version: '2.1-character'
+enabled: true
+
+meta:
+  character-id: 'ningguang'
+  display-name: '凝光'
+  element: 'element_geo'
+  weapon-type: 'catalyst'
+  material: 'NETHER_STAR'
+  rarity: 4
+  default-level: 90
+  max-level: 90
+  aliases:
+    - '凝光'
+  tags:
+    - '岩元素'
+    - '法器角色'
+    - 'geo'
+    - 'catalyst'
+    - '凝光'
+
+stats:
+  base-attack: 212
+  base-health: 9787
+  base-defense: 573
+  element-bonus: 0.24
+
+combat:
+  normal:
+    combo-reset-ms: 1500
+    attachment:
+      group: normal
+      aura: 1.0
+    segments:
+      - 1.0
+
+item:
+  material: 'NETHER_STAR'
+  display-name: '&5{character_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神角色'
+    - '&7元素: &f{element}'
+    - '&7武器: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7命座: &f{constellation}'
+    - ''
+    - '&7基础攻击: &f{base_attack}'
+    - '&7基础生命: &f{base_health}'
+    - '&7基础防御: &f{base_defense}'
+
+notifications:
+  e-cast: true
+  energy-after-e: false
+  q-cast: true
+  screen-bonus: false
+  skill-damage-feedback: false
+
+passive:
+  jade-screen:
+    touch-radius: 1.6
+    buff-duration-ticks: 200
+    geo-bonus: 0.12
+
+normal:
+  max-star-jades: 3
+  cooldown-ms: 1000
+  range: 14.0
+  hitbox-expand: 0.4
+  damage-multiplier: 1.0
+  aura-duration: 90
+
+charged:
+  enabled: true
+  require-sneaking: true
+  attachment:
+    group: charged
+    aura: 1.0
+  cooldown-ms: 2000
+  hunger-cost: 1
+  range: 12.0
+  aura-duration: 120
+  damage-multiplier: 1.74
+  per-star-jade-damage-multiplier: 0.50
+
+e:
+  enabled: true
+  cooldown-ms: 12000
+  attachment:
+    group: e
+    aura: 1.0
+  energy-gain: 0
+  cast-distance: 3.2
+  duration-ticks: 180
+  radius: 2.6
+  aura-duration: 120
+  damage-multiplier: 2.30
+
+q:
+  enabled: true
+  cooldown-ms: 12000
+  attachment:
+    group: q
+    aura: 1.0
+  energy-cost: 40
+  search-radius: 12.0
+  max-targets: 3
+  base-gem-count: 6
+  extra-gems-from-screen: 6
+  gem-damage-multiplier: 0.90
+  aura-duration: 120
+
+messages:
+  normal-cooldown: '&c[凝光] 普通攻击冷却中，还剩 {time} 秒。'
+  e-cast: '&6[凝光] 璇玑屏已经立起。'
+  e-cooldown: '&c[凝光] E 冷却中，还剩 {time} 秒。'
+  energy: '&7[凝光] 当前能量：&f{energy}&7/&f{max_energy}'
+  q-cast: '&6[凝光] 天权崩玉发动，宝石齐射。'
+  q-cooldown: '&c[凝光] Q 冷却中，还剩 {time} 秒。'
+  q-no-energy: '&c[凝光] Q 所需能量不足，当前 {energy}/{max_energy}。'
+  charged-cooldown: '&c[凝光] 重击冷却中，还剩 {time} 秒。'
+  charged-no-hunger: '&c[凝光] 饱食度不足，无法施放重击。'
+  screen-bonus: '&6[凝光] 穿过璇玑屏，岩元素伤害提升。'

@@ -1,0 +1,186 @@
+config-version: '2.1-character'
+enabled: true
+
+meta:
+  character-id: 'xiangling'
+  display-name: '香菱'
+  element: 'element_fire'
+  weapon-type: 'polearm'
+  material: 'NETHER_STAR'
+  rarity: 4
+  default-level: 90
+  max-level: 90
+  aliases:
+    - '香菱'
+  tags:
+    - '火系'
+    - '长枪角色'
+    - 'pyro'
+    - 'polearm'
+    - '料理'
+    - '香菱'
+
+stats:
+  base-attack: 225
+  base-health: 10875
+  base-defense: 669
+  elemental-mastery: 96
+
+combat:
+  normal:
+    combo-reset-ms: 1500
+    attachment:
+      group: normal
+      aura: 1.0
+    segments:
+      - 0.42
+      - 0.42
+      - 0.26
+      - 0.14
+      - 0.71
+
+item:
+  material: 'NETHER_STAR'
+  display-name: '&5{character_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神角色'
+    - '&7元素: &f{element}'
+    - '&7武器: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7命座: &f{constellation}'
+    - ''
+    - '&7基础攻击: &f{base_attack}'
+    - '&7基础生命: &f{base_health}'
+    - '&7基础防御: &f{base_defense}'
+
+notifications:
+  e-cast: true
+  e-hit: true
+  energy-after-e: false
+  pepper-picked: true
+  q-cast: true
+  q-hit: true
+  skill-damage-feedback: true
+
+passive:
+  crossfire:
+    enabled: true
+    distance-bonus: 0.20
+  pepper:
+    enabled: true
+    attack-bonus: 0.10
+    duration-ticks: 200
+    item:
+      material: 'RED_DYE'
+      name: '&c绝云朝天椒'
+      lore:
+        - '&7拾取后攻击力提升 10%'
+        - '&7持续 10 秒'
+      despawn-ticks: 160
+
+e:
+  enabled: true
+  cooldown-ms: 12000
+  attachment:
+    group: e
+    aura: 1.0
+  energy-gain: 0
+  element: 'element_fire'
+  damage-multiplier: 0.92
+  aura-duration: 120
+  shots: 4
+  attack-interval-ticks: 35
+  flame-range: 4.5
+  flame-radius: 1.25
+  flame-angle-degrees: 55.0
+  spawn-distance: 1.6
+  visual:
+    idle-particle: 'FLAME'
+
+charged:
+  enabled: true
+  require-sneaking: true
+  attachment:
+    group: charged
+    aura: 1.0
+  cooldown-ms: 900
+  hunger-cost: 2
+  hit-window-ticks: 14
+  auto-hit-range: 4.0
+  auto-hit-cone-degrees: 105.0
+  damage-multiplier: 1.8
+  path-length: 3.8
+  path-radius: 1.0
+  max-targets: 5
+  targeting:
+    enabled: true
+    max-distance: 5.0
+    min-distance-for-raycast: 3.0
+    hitbox-expand: 0.45
+  dash:
+    enabled: true
+    strength: 0.95
+    vertical: 0.10
+    direct-to-target: true
+    direct-range: 5.0
+    stop-distance: 0.9
+    distance-multiplier: 0.48
+    max-strength: 1.7
+    target-assist-ratio: 0.40
+    start-particle: 'FLAME'
+    burst-ticks: 3
+    burst-decay: 0.86
+    spin-effect:
+      enabled: true
+      sound: 'ITEM_TRIDENT_RIPTIDE_1'
+      sound-volume: 0.8
+      sound-pitch: 1.25
+      particle: 'SWEEP_ATTACK'
+      secondary-particle: 'CLOUD'
+      accent-particle: 'FLAME'
+      radius: 0.75
+      points: 6
+      vertical-step: 0.12
+
+q:
+  enabled: true
+  cooldown-ms: 20000
+  attachment:
+    group: q
+    aura: 1.0
+  spin:
+    attachment:
+      group: q_spin
+      aura: 1.0
+  energy-cost: 80
+  element: 'element_fire'
+  damage-multiplier: 0.72
+  aura-duration: 120
+  duration-ticks: 200
+  radius: 2.2
+  rotation-step: 0.42
+  hit-cooldown-ms: 350
+  opening:
+    enabled: true
+    attachment:
+      group: q_opening
+      aura: 1.0
+    swing-interval-ticks: 4
+    radius: 4.0
+    swing-1-damage-multiplier: 0.75
+    swing-2-damage-multiplier: 0.75
+    swing-3-damage-multiplier: 1.15
+
+messages:
+  e-cast: '&6[香菱] 锅巴出击。'
+  e-hit: '&6[锅巴] 命中 &f{target}&6，造成 &c{damage}&6 点火元素伤害。'
+  e-cooldown: '&c[香菱] E 冷却中，还剩 {time} 秒。'
+  energy: '&7[香菱] 当前能量：&f{energy}&7/&f{max_energy}'
+  pepper-picked: '&6[香菱] 拾取绝云朝天椒，攻击力提升 &f{attack_bonus}&6，持续 &f{duration}&6 秒。'
+  q-cast: '&c[香菱] 旋火轮已展开。'
+  q-hit: '&c[旋火轮] 命中 &f{target}&c，造成 &6{damage}&c 点火元素伤害。'
+  q-cooldown: '&c[香菱] Q 冷却中，还剩 {time} 秒。'
+  q-no-energy: '&c[香菱] Q 所需能量不足，当前 {energy}/{max_energy}。'
+  charged-cooldown: '&c[香菱] 重击冷却中，还剩 {time} 秒。'
+  charged-no-hunger: '&c[香菱] 饥饿值不足，无法施放重击。'

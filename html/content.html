@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Yuanshen 内容资源</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="home.html">首页</a>
+        <a href="features.html">功能总览</a>
+        <a class="is-active" href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero reveal">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Content Library</div>
+            <h1>内容资源<small>当前角色、武器与怪物抗性配置覆盖情况</small></h1>
+            <p class="lead">
+              当前项目最成熟的是框架层，内容量还在扩展中。尽管如此，已经有 7 个角色接入技能引擎，
+              5 把武器具备基础属性和精炼被动，另有 2 份怪物抗性示例资源可直接复用。
+            </p>
+          </div>
+          <aside class="hero-side">
+            <div class="card">
+              <h3>默认资源数量</h3>
+              <ul>
+                <li>角色配置：7</li>
+                <li>武器配置：5</li>
+                <li>怪物抗性配置：2</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Characters</div>
+          <h2>已实现角色</h2>
+          <p>以下角色都有单独配置、技能数据、冷却与能量处理，并已注册到技能引擎。</p>
+        </div>
+        <div class="panel-grid-3">
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag hot">5★</span><span class="tag fire">火</span><span class="tag">长柄武器</span></div>
+            <h3 style="margin-top:12px;">胡桃</h3>
+            <ul>
+              <li>E 进入彼岸蝶舞，吃生命换伤害。</li>
+              <li>低血时拥有额外火伤强化。</li>
+              <li>重击可上血梅香，Q 带爆发伤害与回血。</li>
+              <li>被动可给队伍其他角色提供暴击率增益。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag violet">4★</span><span class="tag fire">火</span><span class="tag">长柄武器</span></div>
+            <h3 style="margin-top:12px;">香菱</h3>
+            <ul>
+              <li>E 召唤锅巴持续喷火。</li>
+              <li>Q 展开旋火轮并支持持续命中提示。</li>
+              <li>带绝云朝天椒被动，拾取后可加攻。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag hot">5★</span><span class="tag fire">火</span><span class="tag">双手剑</span></div>
+            <h3 style="margin-top:12px;">迪卢克</h3>
+            <ul>
+              <li>E 为三段逆焰之刃，支持连段窗口。</li>
+              <li>Q 为爆发 + 凤凰前冲 + 火附魔。</li>
+              <li>被动自带火伤加成。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag hot">5★</span><span class="tag violet">雷</span><span class="tag">单手剑</span></div>
+            <h3 style="margin-top:12px;">刻晴</h3>
+            <ul>
+              <li>E 支持投掷雷楔和二段回位。</li>
+              <li>回位后可进入雷附魔状态。</li>
+              <li>重击和 Q 都有额外雷系逻辑。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag violet">4★</span><span class="tag cool">岩</span><span class="tag">法器</span></div>
+            <h3 style="margin-top:12px;">凝光</h3>
+            <ul>
+              <li>普攻可积累星璇。</li>
+              <li>重击按星璇层数增伤。</li>
+              <li>E 为璇玑屏，Q 为宝石齐射。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag hot">5★</span><span class="tag cool">风</span><span class="tag">单手剑</span></div>
+            <h3 style="margin-top:12px;">旅行者·风</h3>
+            <ul>
+              <li>E 可持续牵引、长按、释放击退。</li>
+              <li>Q 可生成龙卷并吸收元素。</li>
+              <li>被动带持续回血与第五段风刃。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="tag-row"><span class="tag hot">5★</span><span class="tag cool">水</span><span class="tag">弓</span></div>
+            <h3 style="margin-top:12px;">夜兰</h3>
+            <ul>
+              <li>破局矢、重击、E 冲刺、Q 协同水箭都已实现。</li>
+              <li>带按队伍元素多样性加生命的被动。</li>
+              <li>Q 还有爆发期增伤曲线。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Weapons</div>
+          <h2>默认武器资源</h2>
+          <p>武器定义包含基础攻击、副词条、被动 ID 与精炼 1 到 5 级数据。</p>
+        </div>
+        <div class="panel-grid-2">
+          <article class="card reveal"><div class="tag-row"><span class="tag hot">5★</span><span class="tag">长柄武器</span></div><h3 style="margin-top:12px;">和璞鸢</h3><p>基础攻击 674，副词条暴击率。被动可叠层增加攻击，满层再追加伤害加成。</p></article>
+          <article class="card reveal"><div class="tag-row"><span class="tag hot">5★</span><span class="tag">法器</span></div><h3 style="margin-top:12px;">天空之卷</h3><p>基础攻击 674，副词条攻击百分比。被动给全元素伤害加成，并带追击触发逻辑。</p></article>
+          <article class="card reveal"><div class="tag-row"><span class="tag violet">4★</span><span class="tag">双手剑</span></div><h3 style="margin-top:12px;">试作古华</h3><p>基础攻击 565，副词条攻击百分比。被动为概率触发的范围物理伤害。</p></article>
+          <article class="card reveal"><div class="tag-row"><span class="tag violet">4★</span><span class="tag">弓</span></div><h3 style="margin-top:12px;">弓藏</h3><p>基础攻击 510，副词条攻击百分比。被动提升普攻伤害，压低重击收益。</p></article>
+          <article class="card reveal"><div class="tag-row"><span class="tag cool">3★</span><span class="tag">单手剑</span></div><h3 style="margin-top:12px;">黎明神剑</h3><p>基础攻击 401，副词条暴击伤害。高生命状态下提供额外暴击率。</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Monsters</div>
+          <h2>怪物抗性示例资源</h2>
+          <p>当前仓库内置 <strong>僵尸</strong> 和 <strong>骷髅</strong> 两份示例抗性配置，可作为你继续扩展的模板。</p>
+        </div>
+        <div class="panel-grid-2">
+          <article class="card reveal">
+            <h3>每份怪物文件包含什么</h3>
+            <ul>
+              <li>是否启用该文件</li>
+              <li>原版实体类型或 MythicMobs ID</li>
+              <li>全元素抗性与单元素抗性</li>
+              <li>物理抗性</li>
+              <li>最终抗性上下限</li>
+              <li>运行时减抗上限</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <h3>匹配顺序</h3>
+            <ul>
+              <li>若安装 MythicMobs，优先按 <span class="copyable">mythic-mob-id</span> 匹配。</li>
+              <li>若未匹配成功，再回退到原版 <span class="copyable">entity-type</span>。</li>
+              <li>这意味着同一套抗性逻辑可覆盖原版怪与 Mythic 怪。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <footer class="card site-footer reveal">
+        <h3>继续阅读</h3>
+        <div class="button-row" style="justify-content:center;">
+          <a class="button secondary" href="wiki-config.html">去看内容与配置扩展 Wiki</a>
+          <a class="button secondary" href="commands.html">去看命令与管理功能</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

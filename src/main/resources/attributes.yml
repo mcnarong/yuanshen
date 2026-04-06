@@ -1,0 +1,115 @@
+config-version: '1.0-beta' # 属性配置版本号，用于后续自动补全与迁移
+
+lore-stats: # 物品 Lore 属性解析总开关
+  enabled: true # 是否启用从物品 Lore 中读取原神属性
+  strip-color: true # 解析前是否去掉 Lore 里的颜色代码
+
+  sources: # 参与属性统计的装备来源
+    main-hand: true # 是否读取主手物品 Lore
+    off-hand: false # 是否读取副手物品 Lore
+    armor: true # 是否读取四件护甲 Lore
+
+  attributes: # 可识别的属性键定义
+    attack_damage: # 攻击力
+      aliases: ['攻击力', '攻击'] # Lore 中可匹配的别名列表
+      percent: false # 该属性是否按百分比解释
+
+    defense: # 防御力
+      aliases: ['防御力', '防御'] # Lore 中可匹配的别名列表
+      percent: false # 该属性是否按百分比解释
+
+    health: # 生命值上限
+      aliases: ['生命值', '生命上限', '生命'] # Lore 中可匹配的别名列表
+      percent: false # 该属性是否按百分比解释
+
+    crit_rate: # 暴击率
+      aliases: ['暴击率'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    crit_damage: # 暴击伤害
+      aliases: ['暴击伤害'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    element_mastery: # 元素精通
+      aliases: ['元素精通'] # Lore 中可匹配的别名列表
+      percent: false # 该属性是否按百分比解释
+
+    energy_recharge: # 元素充能效率
+      aliases: ['元素充能效率', '充能效率'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    healing_bonus: # 治疗加成
+      aliases: ['治疗加成', '受治疗加成'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    fire_damage: # 火元素伤害加成
+      aliases: ['火元素伤害加成', '火元素伤害', '火伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    water_damage: # 水元素伤害加成
+      aliases: ['水元素伤害加成', '水元素伤害', '水伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    ice_damage: # 冰元素伤害加成
+      aliases: ['冰元素伤害加成', '冰元素伤害', '冰伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    electro_damage: # 雷元素伤害加成
+      aliases: ['雷元素伤害加成', '雷元素伤害', '雷伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    anemo_damage: # 风元素伤害加成
+      aliases: ['风元素伤害加成', '风元素伤害', '风伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    geo_damage: # 岩元素伤害加成
+      aliases: ['岩元素伤害加成', '岩元素伤害', '岩伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    dendro_damage: # 草元素伤害加成
+      aliases: ['草元素伤害加成', '草元素伤害', '草伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    all_element_damage: # 全元素伤害加成
+      aliases: ["全元素伤害加成", "全元素伤害", "全元素伤害加", "元素伤害加成", "元素伤害", "元素伤害加"] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    physical_damage: # 物理伤害加成
+      aliases: ['物理伤害加成', '物伤'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    fire_resistance: # 火元素抗性
+      aliases: ['火元素抗性', '火抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    water_resistance: # 水元素抗性
+      aliases: ['水元素抗性', '水抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    ice_resistance: # 冰元素抗性
+      aliases: ['冰元素抗性', '冰抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    electro_resistance: # 雷元素抗性
+      aliases: ['雷元素抗性', '雷抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    anemo_resistance: # 风元素抗性
+      aliases: ['风元素抗性', '风抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    geo_resistance: # 岩元素抗性
+      aliases: ['岩元素抗性', '岩抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    dendro_resistance: # 草元素抗性
+      aliases: ['草元素抗性', '草抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    all_element_resistance: # 全元素抗性
+      aliases: ["全元素抗性", "全元素抗", "元素抗性", "元素抗"] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释
+
+    physical_resistance: # 物理抗性
+      aliases: ['物理抗性', '物抗'] # Lore 中可匹配的别名列表
+      percent: true # 该属性是否按百分比解释

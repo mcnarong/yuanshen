@@ -1,0 +1,57 @@
+name: Yuanshen
+version: 1.0-beta
+main: org.yuanshen.yuanshen.Yuanshen
+api-version: 1.13
+author: 南蓉
+description: 原神元素反应插件 1.0-beta 测试版
+softdepend: [PlaceholderAPI, ProtocolLib, MythicMobs]
+
+commands:
+  yuanshen:
+    description: Yuanshen main command
+    usage: /ys <reload|stats|damage|sidebar|skill|open|give|list|player|admin>
+    aliases: [ys]
+
+permissions:
+  yuanshen.reload:
+    description: 允许重载插件
+    default: op
+  yuanshen.stats.self:
+    description: 允许查看自己的原神属性
+    default: true
+  yuanshen.stats.others:
+    description: 允许查看其他玩家的原神属性
+    default: op
+  yuanshen.damage.self:
+    description: 允许切换自己的伤害显示
+    default: true
+  yuanshen.damage.others:
+    description: 允许切换其他玩家的伤害显示
+    default: op
+  yuanshen.sidebar.self:
+    description: 允许切换自己的侧边栏
+    default: true
+  yuanshen.sidebar.others:
+    description: 允许切换其他玩家的侧边栏
+    default: op
+  yuanshen.character.gui:
+    description: 允许打开角色编队界面
+    default: true
+  yuanshen.character.give:
+    description: 允许发放和管理角色物品
+    default: op
+  yuanshen.player.set:
+    description: 允许切换当前角色槽
+    default: true
+  yuanshen.skill.cast:
+    description: 允许通过指令释放技能
+    default: true
+  yuanshen.element.self:
+    description: 允许设置自己的当前元素
+    default: true
+  yuanshen.weapon.give:
+    description: 允许管理和发放原神武器
+    default: op
+  yuanshen.admin.gui:
+    description: 允许打开管理员 GUI
+    default: op

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Wiki - 管理维护</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="home.html">首页</a>
+        <a href="features.html">功能总览</a>
+        <a href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a class="is-active" href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+    <div class="container sub-nav-wrap">
+      <nav class="sub-nav">
+        <a href="wiki.html">Wiki 首页</a>
+        <a href="wiki-install.html">安装部署</a>
+        <a href="wiki-player.html">玩家使用</a>
+        <a class="is-active" href="wiki-admin.html">管理维护</a>
+        <a href="wiki-config.html">配置扩展</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container wiki-layout">
+      <aside class="card wiki-sidebar reveal">
+        <h3>本页目录</h3>
+        <a class="is-active" href="#give">发放内容</a>
+        <a href="#inspect">查看玩家状态</a>
+        <a href="#admin-gui">管理员 GUI</a>
+        <a href="#reload">重载与刷新</a>
+        <a href="#troubleshoot">常见排查</a>
+      </aside>
+
+      <div>
+        <section class="hero reveal">
+          <div class="eyebrow">Wiki · Admin</div>
+          <h1>管理维护<small>服主如何发内容、看状态、做运维</small></h1>
+          <p class="lead">这一页写的是服主和管理员的实际工作流，而不是只贴命令列表。</p>
+        </section>
+
+        <section id="give" class="section">
+          <div class="section-head reveal"><h2>1. 发放角色、武器和命星</h2></div>
+          <article class="card reveal">
+            <div class="code-block">/ys give character 刻晴 90 6 玩家名</div>
+            <div class="code-block">/ys give weapon 和璞鸢 90 5 玩家名</div>
+            <div class="code-block">/ys give constellation 10 玩家名</div>
+            <ul>
+              <li>角色命令支持“角色、等级、命座、目标玩家”。</li>
+              <li>武器命令支持“武器、等级、精炼、目标玩家”。</li>
+              <li>若玩家背包满，发放会失败。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="inspect" class="section">
+          <div class="section-head reveal"><h2>2. 查看玩家当前状态</h2></div>
+          <article class="card reveal">
+            <div class="code-block">/ys stats 玩家名</div>
+            <ul>
+              <li>查看当前角色槽、角色名、武器名、元素、攻击、防御、生命、暴击、精通等。</li>
+              <li>如果目标不在线，控制台或管理员会收到明确提示。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="admin-gui" class="section">
+          <div class="section-head reveal"><h2>3. 用管理员 GUI 做什么</h2></div>
+          <article class="card reveal">
+            <div class="code-block">/ys admin</div>
+            <ul>
+              <li>主菜单：进入玩家管理、配置重载、关闭菜单。</li>
+              <li>玩家页：角色/武器编辑、武器发放、玩家数据、刷新属性。</li>
+              <li>开关：切侧边栏、切伤害显示、清除玩家当前元素。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="reload" class="section">
+          <div class="section-head reveal"><h2>4. 重载与刷新</h2></div>
+          <article class="card reveal">
+            <div class="code-block">/ys reload</div>
+            <ul>
+              <li>修改完配置后优先使用这条命令。</li>
+              <li>它会重载主配置、角色配置、属性配置、侧边栏配置，以及角色、武器、怪物抗性资源。</li>
+              <li>若只是想让某个玩家立即同步，也可以在管理员 GUI 里用“刷新属性”。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="troubleshoot" class="section">
+          <div class="section-head reveal"><h2>5. 常见排查顺序</h2></div>
+          <article class="card reveal">
+            <div class="step-list">
+              <div class="step"><b>01</b><div><strong>技能放不出来</strong><p>先看玩家是否有选中角色，再看主手武器类型是否匹配，然后看冷却和能量。</p></div></div>
+              <div class="step"><b>02</b><div><strong>侧边栏不刷新</strong><p>检查 <span class="copyable">sidebar.enabled</span>、玩家开关状态，以及是否刚重载过配置。</p></div></div>
+              <div class="step"><b>03</b><div><strong>武器或角色发不出去</strong><p>检查 ID 是否存在、玩家是否在线、背包是否有空位。</p></div></div>
+              <div class="step"><b>04</b><div><strong>怪物抗性没生效</strong><p>有 MythicMobs 时先看 mob ID 是否匹配；否则看 entity-type 是否正确。</p></div></div>
+              <div class="step"><b>05</b><div><strong>数据没保存</strong><p>确认插件正常关服、玩家是否正常退出，以及 <span class="copyable">playerdata.yml</span> 是否可写。</p></div></div>
+            </div>
+          </article>
+        </section>
+
+        <footer class="card site-footer reveal">
+          <h3>下一步</h3>
+          <div class="button-row" style="justify-content:center;">
+            <a class="button secondary" href="wiki-config.html">继续看配置扩展</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

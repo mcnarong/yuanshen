@@ -1,0 +1,177 @@
+config-version: '1.0-character-gui'
+
+character-gui:
+  title: '&3原神角色编队'
+  size: 27
+
+  behavior:
+    open-constellation-on-select: true
+
+  layout:
+    help-slot: 0
+    status-slot: 4
+    mode-slot: 8
+    switch-guide-slot: 22
+    character-slots: [10, 12, 14, 16]
+    indicator-slots: [19, 21, 23, 25]
+    primary-accent-slots: [1, 2, 3, 5, 6, 7]
+    secondary-accent-slots: [9, 11, 13, 15, 17, 18, 20, 24, 26]
+
+  # 可用占位符：
+  # {slot} {selected_slot} {character} {character_name} {character_level}
+  # {character_constellation} {required_weapon_type}
+  # {main_hand_status} {main_hand_weapon} {selected} {mode_line}
+  # cmd = CustomModelData，自定义模型值；-1 表示不设置。
+  items:
+    frame:
+      material: 'GRAY_STAINED_GLASS_PANE'
+      cmd: -1
+      name: ' '
+      lore: []
+
+    accent-primary:
+      material: 'CYAN_STAINED_GLASS_PANE'
+      cmd: -1
+      name: ' '
+      lore: []
+
+    accent-secondary:
+      material: 'LIGHT_BLUE_STAINED_GLASS_PANE'
+      cmd: -1
+      name: ' '
+      lore: []
+
+    help:
+      material: 'BOOK'
+      cmd: -1
+      name: '&b编队说明'
+      lore:
+        - '&71. 本界面只放角色，不再存武器。'
+        - '&72. 你手里拿着武器时，系统直接检测主手。'
+        - '&73. 下方按钮切换当前出战角色。'
+        - '&74. 切换后点击按钮可继续查看该角色命座。'
+
+    switch-guide:
+      material: 'COMPARATOR'
+      cmd: -1
+      name: '&6出战切换'
+      lore:
+        - '&7点击下方按钮切换出战角色。'
+        - '&7如果槽位里有角色，会自动打开命座界面。'
+        - '&7如果槽位为空，则只切换当前槽位。'
+
+    status:
+      no-character:
+        material: 'BARRIER'
+        cmd: -1
+        name: '&c当前未选择角色'
+        lore:
+          - '&7当前槽位: &f{selected_slot}'
+          - '&7当前角色: &f{character}'
+          - '&7需求武器类型: &f{required_weapon_type}'
+          - '{mode_line}'
+      active:
+        material: 'EMERALD'
+        cmd: -1
+        name: '&a当前为角色战斗模式'
+        lore:
+          - '&7当前槽位: &f{selected_slot}'
+          - '&7当前角色: &f{character}'
+          - '&7需求武器类型: &f{required_weapon_type}'
+          - '{mode_line}'
+      inactive:
+        material: 'CLOCK'
+        cmd: -1
+        name: '&e当前为玩家模式'
+        lore:
+          - '&7当前槽位: &f{selected_slot}'
+          - '&7当前角色: &f{character}'
+          - '&7需求武器类型: &f{required_weapon_type}'
+          - '{mode_line}'
+
+    mode:
+      no-weapon:
+        material: 'SPYGLASS'
+        cmd: -1
+        name: '&e主手未持已注册武器'
+        lore:
+          - '&7检测方式: &f仅检测主手武器'
+          - '&7主手状态: &f{main_hand_status}'
+          - '&7角色要求: &f{required_weapon_type}'
+          - '&8把正确类型的武器拿在手里即可战斗。'
+      no-character:
+        material: 'COMPASS'
+        cmd: -1
+        name: '&e先选择一个角色'
+        lore:
+          - '&7检测方式: &f仅检测主手武器'
+          - '&7主手状态: &f{main_hand_status}'
+          - '&7角色要求: &f{required_weapon_type}'
+          - '&8把正确类型的武器拿在手里即可战斗。'
+      matched:
+        material: 'RESPAWN_ANCHOR'
+        cmd: -1
+        name: '&a主手检测通过'
+        lore:
+          - '&7检测方式: &f仅检测主手武器'
+          - '&7主手状态: &f{main_hand_status}'
+          - '&7角色要求: &f{required_weapon_type}'
+          - '&8把正确类型的武器拿在手里即可战斗。'
+      mismatch:
+        material: 'GRINDSTONE'
+        cmd: -1
+        name: '&c主手武器类型不匹配'
+        lore:
+          - '&7检测方式: &f仅检测主手武器'
+          - '&7主手状态: &f{main_hand_status}'
+          - '&7角色要求: &f{required_weapon_type}'
+          - '&8把正确类型的武器拿在手里即可战斗。'
+
+    indicator:
+      selected:
+        material: 'LIME_DYE'
+        cmd: -1
+        name: '&a槽位 {slot}'
+        lore:
+          - '&a当前已选中此槽位。'
+          - '&7角色: &f{character}'
+          - '{mode_line}'
+          - '&8点击后可继续查看该槽位角色命座。'
+      empty:
+        material: 'GRAY_DYE'
+        cmd: -1
+        name: '&7空槽 {slot}'
+        lore:
+          - '&7点击切换到该槽位。'
+          - '&7角色: &f{character}'
+          - '{mode_line}'
+          - '&8点击后可继续查看该槽位角色命座。'
+      ready:
+        material: 'YELLOW_DYE'
+        cmd: -1
+        name: '&e槽位 {slot}'
+        lore:
+          - '&7点击切换到该槽位。'
+          - '&7角色: &f{character}'
+          - '{mode_line}'
+          - '&8点击后可继续查看该槽位角色命座。'
+      normal:
+        material: 'WHITE_DYE'
+        cmd: -1
+        name: '&f槽位 {slot}'
+        lore:
+          - '&7点击切换到该槽位。'
+          - '&7角色: &f{character}'
+          - '{mode_line}'
+          - '&8点击后可继续查看该槽位角色命座。'
+
+  messages:
+    offline-managed-player: '&c当前被管理的玩家已离线。'
+    offline-viewed-player: '&c当前被查看的玩家已离线。'
+    selected-empty-slot: '&e已切换到槽位 &f{slot}&e，该槽位没有角色。'
+    selected-slot: '&a已切换到槽位 &f{slot}&a，当前角色为 &f{character}&a。'
+    only-character-items: '&c这里只允许放角色物品。'
+    weapon-main-hand-hint: '&e角色界面不再存武器。请把武器直接拿在主手使用。'
+    character-added: '&a已将角色 &f{character}&a 放入槽位 &f{slot}&a。'
+    characters-full: '&c角色槽已满，最多只能放 4 位角色。'
+    backpack-full: '&c背包空间不足，无法取出槽位中的物品。'

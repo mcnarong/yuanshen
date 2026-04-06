@@ -1,0 +1,157 @@
+config-version: '2.1-character'
+enabled: true
+
+meta:
+  character-id: 'yelan'
+  display-name: '夜兰'
+  element: 'element_water'
+  weapon-type: 'bow'
+  material: 'NETHER_STAR'
+  rarity: 5
+  default-level: 90
+  max-level: 90
+  aliases:
+    - '夜兰'
+    - '夜阑'
+  tags:
+    - '水元素'
+    - '弓角色'
+    - 'hydro'
+    - 'bow'
+    - '夜兰'
+
+stats:
+  base-attack: 244
+  base-health: 14450
+  base-defense: 548
+  crit-rate: 0.192
+
+combat:
+  normal:
+    combo-reset-ms: 1500
+    attachment:
+      group: normal
+      aura: 1.0
+    segments:
+      - 0.41
+      - 0.39
+      - 0.52
+      - 0.68
+
+item:
+  material: 'NETHER_STAR'
+  display-name: '&6{character_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神角色'
+    - '&7元素: &f{element}'
+    - '&7武器: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7命座: &f{constellation}'
+    - ''
+    - '&7基础攻击: &f{base_attack}'
+    - '&7基础生命: &f{base_health}'
+    - '&7基础防御: &f{base_defense}'
+
+notifications:
+  breakthrough-hit: true
+  e-cast: true
+  e-hit: true
+  energy-after-e: false
+  q-cast: true
+  q-hit: true
+  skill-damage-feedback: true
+
+passive:
+  hp-bonus:
+    enabled: true
+    per-unique-element: 0.06
+  burst-ramp:
+    enabled: true
+    initial-damage-bonus: 0.01
+    per-second-damage-bonus: 0.035
+    max-damage-bonus: 0.50
+
+e:
+  enabled: true
+  cooldown-ms: 10000
+  attachment:
+    group: e
+    aura: 1.0
+  energy-gain: 0
+  dash-ticks: 10
+  dash-speed: 1.08
+  mark-radius: 1.6
+  max-health-damage-multiplier: 0.11
+  aura-duration: 120
+
+charged:
+  enabled: true
+  require-sneaking: false
+  attachment:
+    group: charged
+    aura: 1.0
+  charge-ms: 3000
+  cooldown-ms: 1100
+  hunger-cost: 2
+  hit-window-ticks: 16
+  aura-duration: 120
+  auto-hit-range: 20.0
+  auto-hit-cone-degrees: 24.0
+  damage-multiplier: 1.8
+  path-length: 20.0
+  path-radius: 0.75
+  max-targets: 1
+  targeting:
+    max-distance: 20.0
+    min-distance-for-raycast: 2.5
+    hitbox-expand: 0.45
+
+breakthrough:
+  enabled: true
+  charge-ms: 1000
+  attachment:
+    group: breakthrough
+    aura: 1.0
+  cooldown-ms: 5000
+  enemy-check-radius: 10.0
+  out-of-combat-ms: 5000
+  damage-multiplier: 2.4
+  max-health-damage-multiplier: 0.12
+  radius: 2.8
+  aura-duration: 120
+
+q:
+  enabled: true
+  cooldown-ms: 18000
+  attachment:
+    group: q
+    aura: 1.0
+  coordinate:
+    attachment:
+      group: q_coordinate
+      aura: 1.0
+  energy-cost: 70
+  duration-ticks: 300
+  coordinate-cooldown-ms: 1000
+  coordinate-search-radius: 4.5
+  coordinate-max-targets: 3
+  coordinate-max-health-damage-multiplier: 0.07
+  aura-duration: 120
+
+messages:
+  charged-fired: '&b[夜兰] 重击已射出，造成水元素伤害。'
+  charged-ready: '&b[夜兰] 重击已蓄满，可发射水元素箭。'
+  breakthrough-fired: '&b[夜兰] 破局矢已射出，造成水元素伤害，5 秒后可再次触发破局。'
+  breakthrough-ready: '&b[夜兰] 破局矢已蓄满，可发射水元素破局矢。'
+  breakthrough-hit: '&b[夜兰] 破局矢在目标周围炸开，额外命中 {count} 个目标。'
+  e-cast: '&b[夜兰] 萦络纵命索展开，开始高速缠络目标。'
+  e-hit: '&b[夜兰] 络命丝引爆，命中 {count} 个目标。'
+  e-cooldown: '&c[夜兰] E 冷却中，还剩 {time} 秒。'
+  energy: '&7[夜兰] 当前能量：&f{energy}&7/&f{max_energy}'
+  q-cast: '&b[夜兰] 渊图玲珑骰已释放，开始协同水箭攻击。'
+  q-hit: '&b[夜兰] 渊图玲珑骰命中 {target}，造成 {damage} 点水元素伤害。'
+  q-cooldown: '&c[夜兰] Q 冷却中，还剩 {time} 秒。'
+  q-no-energy: '&c[夜兰] Q 所需能量不足，当前 {energy}/{max_energy}。'
+  charged-cooldown: '&c[夜兰] 重击冷却中，还剩 {time} 秒。'
+  charged-no-hunger: '&c[夜兰] 饱食度不足，无法施放重击。'

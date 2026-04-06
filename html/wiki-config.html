@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Wiki - 配置扩展</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="home.html">首页</a>
+        <a href="features.html">功能总览</a>
+        <a href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a class="is-active" href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+    <div class="container sub-nav-wrap">
+      <nav class="sub-nav">
+        <a href="wiki.html">Wiki 首页</a>
+        <a href="wiki-install.html">安装部署</a>
+        <a href="wiki-player.html">玩家使用</a>
+        <a href="wiki-admin.html">管理维护</a>
+        <a class="is-active" href="wiki-config.html">配置扩展</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container wiki-layout">
+      <aside class="card wiki-sidebar reveal">
+        <h3>本页目录</h3>
+        <a class="is-active" href="#main">主配置</a>
+        <a href="#characters">角色文件</a>
+        <a href="#weapons">武器文件</a>
+        <a href="#mobs">怪物抗性</a>
+        <a href="#display">展示与键位</a>
+        <a href="#lore">Lore 属性解析</a>
+      </aside>
+
+      <div>
+        <section class="hero reveal">
+          <div class="eyebrow">Wiki · Config</div>
+          <h1>配置扩展<small>你应该从哪些文件开始扩展这个插件</small></h1>
+          <p class="lead">这一页不是列目录，而是告诉你每类配置应该负责什么。</p>
+        </section>
+
+        <section id="main" class="section">
+          <div class="section-head reveal"><h2>1. 主配置文件</h2></div>
+          <article class="card reveal">
+            <p>主文件是 <span class="copyable">config.yml</span>，它负责战斗框架级参数：</p>
+            <ul>
+              <li>元素基础倍率</li>
+              <li>反应倍率与消耗量</li>
+              <li>冻结、感电、燃烧、绽放、超绽放、烈绽放、扩散等细节</li>
+              <li>元素精通公式</li>
+              <li>属性覆盖到 Bukkit 原版属性的行为</li>
+              <li>标准 ICD 与附着持续时间分层</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="characters" class="section">
+          <div class="section-head reveal"><h2>2. 角色文件</h2></div>
+          <article class="card reveal">
+            <p>角色文件位于 <span class="copyable">juese/*.yml</span>，每个角色文件通常包含：</p>
+            <ul>
+              <li>角色 ID、显示名、元素、武器类型、星级</li>
+              <li>基础攻击、生命、防御和副属性</li>
+              <li>普攻分段倍率</li>
+              <li>E、Q、重击、被动、通知文本</li>
+              <li>角色物品的材质、名字和 Lore 模板</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="weapons" class="section">
+          <div class="section-head reveal"><h2>3. 武器文件</h2></div>
+          <article class="card reveal">
+            <p>武器文件位于 <span class="copyable">weapons/*.yml</span>，负责：</p>
+            <ul>
+              <li>武器 ID、显示名、类型、星级、等级上限、精炼上限</li>
+              <li>基础攻击和副词条</li>
+              <li>被动 ID</li>
+              <li>精炼 1 到 5 的数值变化</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="mobs" class="section">
+          <div class="section-head reveal"><h2>4. 怪物抗性文件</h2></div>
+          <article class="card reveal">
+            <p>怪物抗性文件位于 <span class="copyable">mobs/*.yml</span>，建议从默认的僵尸和骷髅文件开始改。</p>
+            <ul>
+              <li>设置 entity-type 或 mythic-mob-id</li>
+              <li>配置全元素抗性、单元素抗性与物理抗性</li>
+              <li>配置允许的最终抗性上下限</li>
+              <li>配置运行时减抗的最大生效值</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="display" class="section">
+          <div class="section-head reveal"><h2>5. 展示与键位</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li><span class="copyable">sidebar.yml</span>：标题、布局、刷新频率、占位符行。</li>
+              <li><span class="copyable">character-gui.yml</span>：角色 GUI 布局、材质、提示文案。</li>
+              <li><span class="copyable">mod-keybind.yml</span>：1-4/E/Q/L 等按键绑定、激活模式、吞原版行为。</li>
+              <li><span class="copyable">starter-characters.yml</span>：首次加入是否自动送默认角色。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="lore" class="section">
+          <div class="section-head reveal"><h2>6. Lore 属性解析</h2></div>
+          <article class="card reveal">
+            <p><span class="copyable">attributes.yml</span> 负责从装备 Lore 里读属性。当前默认支持：</p>
+            <ul>
+              <li>攻击、防御、生命</li>
+              <li>暴击率、暴击伤害、元素精通、充能效率、治疗加成</li>
+              <li>火/水/冰/雷/风/岩/草伤、全元素伤害、物理伤害</li>
+              <li>火/水/冰/雷/风/岩/草抗、全元素抗性、物理抗性</li>
+            </ul>
+          </article>
+        </section>
+
+        <footer class="card site-footer reveal">
+          <h3>配置修改后的建议动作</h3>
+          <p>修改完配置后，优先使用 <span class="copyable">/ys reload</span>，再进游戏验证角色、武器、GUI 和反应是否按预期生效。</p>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

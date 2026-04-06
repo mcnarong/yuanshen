@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <meta http-equiv="refresh" content="0; url=home.html">
+  <title>Yuanshen 站点跳转</title>
+  <script>
+    window.location.replace("home.html");
+  </script>
+  <style>
+    :root{
+      --bg:#08131c;--bg2:#0d1f2d;--panel:rgba(12,24,35,.78);--line:rgba(255,240,214,.11);
+      --text:#f7f2e8;--muted:#c8bfad;--gold:#e8c07d;--gold2:#f5d89f;--cyan:#7fd6d0;
+      --cyan2:#58e7d8;--ember:#ff8b57;--jade:#8fdd9f;--violet:#9ca7ff;--shadow:0 26px 72px rgba(0,0,0,.34);
+      --r1:30px;--r2:22px;--r3:16px;--wrap:1220px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;color:var(--text);font:16px/1.65 "Segoe UI Variable Display","Microsoft YaHei UI","PingFang SC",sans-serif;
+      background:
+        radial-gradient(circle at 14% 12%,rgba(127,214,208,.14),transparent 24%),
+        radial-gradient(circle at 82% 10%,rgba(255,139,87,.14),transparent 26%),
+        radial-gradient(circle at 50% 90%,rgba(232,192,125,.12),transparent 28%),
+        linear-gradient(180deg,#071019,#09131c 38%,#08111a);
+      min-height:100vh;overflow-x:hidden;
+    }
+    body::before,body::after{
+      content:"";position:fixed;width:32rem;height:32rem;border-radius:50%;filter:blur(70px);opacity:.18;z-index:-2;pointer-events:none;
+    }
+    body::before{top:-12rem;right:-7rem;background:linear-gradient(135deg,rgba(232,192,125,.7),rgba(127,214,208,.08))}
+    body::after{left:-8rem;bottom:-12rem;background:linear-gradient(135deg,rgba(255,139,87,.55),rgba(127,214,208,.08))}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(calc(100% - 32px),var(--wrap));margin:0 auto}
+    .top{
+      position:sticky;top:0;z-index:30;border-bottom:1px solid var(--line);backdrop-filter:blur(18px);
+      background:linear-gradient(180deg,rgba(7,16,25,.92),rgba(7,16,25,.62));
+    }
+    .topbar{min-height:74px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .mark{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      font:700 1rem/1 "Bahnschrift","Segoe UI Variable Display",sans-serif;letter-spacing:.08em;color:#0e1720;
+      background:linear-gradient(135deg,var(--gold2),var(--cyan));box-shadow:0 14px 26px rgba(95,231,216,.18);
+    }
+    .brand strong{display:block;font:700 1.02rem/1 "Bahnschrift","Segoe UI Variable Display",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .brand span{display:block;color:var(--muted);font-size:.9rem}
+    .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}
+    .nav a{padding:10px 14px;border-radius:999px;border:1px solid transparent;font-size:.94rem;color:rgba(247,242,232,.84);transition:.25s}
+    .nav a:hover{border-color:var(--line);background:rgba(255,255,255,.04);color:var(--text);transform:translateY(-1px)}
+    .hero{padding:52px 0 20px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.82fr);gap:28px}
+    .card{
+      border:1px solid var(--line);background:linear-gradient(180deg,rgba(17,32,46,.72),rgba(8,18,27,.84));
+      border-radius:var(--r1);box-shadow:var(--shadow);backdrop-filter:blur(16px);
+    }
+    .hero-main{position:relative;padding:34px;overflow:hidden}
+    .hero-main::before{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(circle at 12% 12%,rgba(255,255,255,.1),transparent 22%),
+      linear-gradient(135deg,rgba(232,192,125,.18),rgba(95,231,216,.06) 42%,transparent 76%);
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);font-size:.82rem;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);
+    }
+    h1{margin:20px 0 16px;font:700 clamp(2.8rem,7vw,5.1rem)/.96 "Bahnschrift","Segoe UI Variable Display",sans-serif;letter-spacing:.03em}
+    h1 small{display:block;margin-top:12px;color:var(--cyan);font:500 clamp(1.03rem,2vw,1.28rem)/1.4 "Segoe UI Variable Display","Microsoft YaHei UI",sans-serif;letter-spacing:.1em}
+    h2{margin:0;font:700 clamp(1.5rem,2.4vw,2.2rem)/1.15 "Bahnschrift","Segoe UI Variable Display",sans-serif;letter-spacing:.04em}
+    h3{margin:0 0 10px;font-size:1.08rem;letter-spacing:.02em}
+    p{margin:0}
+    .lede,.muted,.card p,.section-head p,.side p{color:var(--muted)}
+    .lede{max-width:68ch;font-size:1.04rem}
+    .badges,.chips,.meta{display:flex;flex-wrap:wrap;gap:10px}
+    .badge,.chip,.tag,.file,.code{
+      display:inline-flex;align-items:center;min-height:36px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04)
+    }
+    .badge strong,.chip strong{color:var(--gold2)}
+    .buttons{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:600;
+      transition:.25s ease
+    }
+    .btn.primary{color:#111b20;background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 16px 32px rgba(232,192,125,.28)}
+    .btn.secondary{color:var(--text);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .btn:hover{transform:translateY(-2px)}
+    .side{padding:24px;display:grid;gap:18px;align-content:start}
+    .box{
+      padding:18px;border-radius:var(--r2);border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+    }
+    .box strong{display:block;margin-bottom:8px;color:var(--gold2);font-size:1.04rem}
+    .box ul,.list ul,.card ul,.panel ul{padding-left:18px;margin:14px 0 0;color:var(--muted)}
+    .box li,.list li,.card li,.panel li{margin:6px 0}
+    .stats{padding:12px 0 24px}
+    .stats-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+    .stat{
+      position:relative;padding:18px;border-radius:var(--r2);border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(15,29,43,.75),rgba(9,18,28,.84));box-shadow:var(--shadow);overflow:hidden;
+    }
+    .stat::after{content:"";position:absolute;right:-10%;bottom:-38%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 64%)}
+    .stat strong{display:block;margin-bottom:8px;color:var(--gold2);font:700 clamp(1.8rem,2.8vw,2.4rem)/1 "Bahnschrift","Segoe UI Variable Display",sans-serif}
+    .stat span{display:block;color:var(--muted);font-size:.94rem}
+    section{padding:38px 0 12px}
+    .section-head{display:grid;gap:10px;margin-bottom:22px}
+    .grid3,.grid2,.grid4,.cmd-grid,.placeholder-grid,.timeline-grid,.int-grid{display:grid;gap:18px}
+    .grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid2,.cmd-grid,.placeholder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .int-grid,.timeline-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .panel,.list{padding:22px;border-radius:var(--r2)}
+    .jump{display:block;transition:.25s ease}
+    .jump:hover{transform:translateY(-3px);border-color:rgba(255,240,214,.18);background:linear-gradient(180deg,rgba(24,42,58,.76),rgba(9,18,27,.86))}
+    .kicker{
+      display:inline-block;margin-bottom:10px;padding:6px 10px;border-radius:999px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--cyan);background:rgba(95,231,216,.08);border:1px solid rgba(95,231,216,.16)
+    }
+    .combat{display:grid;grid-template-columns:1.08fr .92fr;gap:18px}
+    .reaction-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+    .reaction,.step,.perm{
+      padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.035)
+    }
+    .reaction strong{display:block;margin-bottom:8px;color:var(--gold2)}
+    .steps{display:grid;gap:12px;margin-top:16px}
+    .step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+    .step b{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#112027;
+      background:linear-gradient(135deg,var(--gold2),var(--cyan));font:700 1rem/1 "Bahnschrift","Segoe UI Variable Display",sans-serif
+    }
+    .content-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .meta{gap:8px}
+    .tag{padding:6px 10px;font-size:.82rem}
+    .hot{color:#ffe8be;border-color:rgba(232,192,125,.24);background:rgba(232,192,125,.08)}
+    .cool{color:#cafbf6;border-color:rgba(95,231,216,.24);background:rgba(95,231,216,.08)}
+    .fire{color:#ffd1c3;border-color:rgba(255,139,87,.24);background:rgba(255,139,87,.08)}
+    .jade{color:#d6f8dd;border-color:rgba(143,221,159,.24);background:rgba(143,221,159,.08)}
+    .violet{color:#dfe2ff;border-color:rgba(156,167,255,.24);background:rgba(156,167,255,.08)}
+    .cmd-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+    .code,.file{font: .9rem/1.4 "Consolas","Cascadia Code",monospace;word-break:break-word;border-radius:12px}
+    .code.block{display:block;margin-top:10px;border-radius:14px}
+    .copy{
+      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--text);border-radius:999px;padding:8px 12px;cursor:pointer;transition:.25s
+    }
+    .copy:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+    .copy.ok{border-color:rgba(143,221,159,.3);background:rgba(143,221,159,.12);color:#dff8e5}
+    .perms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    .perm code{display:block;margin-bottom:6px;font: .88rem/1.4 "Consolas","Cascadia Code",monospace;color:#f8e8c7}
+    details{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:18px;overflow:hidden}
+    details+details{margin-top:12px}
+    summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:600;color:var(--gold2)}
+    summary::-webkit-details-marker{display:none}
+    .detail-body{padding:0 18px 18px;color:var(--muted)}
+    .files{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    footer.card{margin:44px 0 48px;padding:24px;text-align:center;display:grid;gap:10px}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.show{opacity:1;transform:none}
+    @media (max-width:1180px){
+      .hero-grid,.combat,.grid3,.content-grid,.int-grid,.timeline-grid,.placeholder-grid,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:820px){
+      .topbar,.nav{justify-content:center}
+      .hero-main,.side,.panel,.list,footer.card{padding:18px;border-radius:24px}
+      .hero-grid,.stats-grid,.grid3,.grid2,.grid4,.combat,.reaction-grid,.content-grid,.cmd-grid,.placeholder-grid,.timeline-grid,.int-grid,.perms{grid-template-columns:1fr}
+      h1{font-size:clamp(2.4rem,12vw,3.4rem)}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap topbar">
+      <a class="brand" href="#top">
+        <div class="mark">YS</div>
+        <div>
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#wiki">Wiki</a>
+        <a href="#systems">系统</a>
+        <a href="#combat">战斗</a>
+        <a href="#content">内容库</a>
+        <a href="#commands">命令与 GUI</a>
+        <a href="#integrations">联动与配置</a>
+        <a href="#persistence">持久化</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="hero-main card reveal">
+          <div class="eyebrow">Source Snapshot · 2026-04-07</div>
+          <h1>Yuanshen<small>把原神式角色、元素与战斗链路植入 Minecraft Paper 服务器</small></h1>
+          <p class="lede">
+            这不是一个只做元素附伤的小插件，而是一套已经成型的服务端原神战斗框架。当前源码已经覆盖七元素与 16 种反应、
+            角色编队、武器与精炼、命座升级、技能引擎、伤害与面板展示、怪物抗性、MythicMobs 桥接、
+            客户端按键桥和玩家数据持久化。
+          </p>
+          <div class="badges" style="margin-top:22px">
+            <span class="badge"><strong>版本</strong> 1.0-beta</span>
+            <span class="badge"><strong>平台</strong> Paper 1.21+</span>
+            <span class="badge"><strong>JDK</strong> Java 21</span>
+            <span class="badge"><strong>作者</strong> 南蓉</span>
+            <span class="badge"><strong>产物</strong> Yuanshen-1.0.jar</span>
+          </div>
+          <div class="buttons">
+            <a class="btn primary" href="#systems">查看完整功能</a>
+            <a class="btn secondary" href="#commands">查看命令与管理</a>
+            <a class="btn secondary" href="#content">查看角色与武器</a>
+          </div>
+        </article>
+
+        <aside class="side card reveal">
+          <h2>项目定位</h2>
+          <p>根据当前仓库源码与配置整理，这个项目最成熟的是整套框架层，内容量处于 Beta 持续扩展阶段。</p>
+          <div class="box">
+            <strong>适合当前宣传口径</strong>
+            <ul>
+              <li>原神战斗框架 Beta</li>
+              <li>适合测试服、体验服、小规模私服</li>
+              <li>已具备可配置、可发放、可管理、可持久化的后台能力</li>
+            </ul>
+          </div>
+          <div class="box">
+            <strong>当前不建议夸大的点</strong>
+            <ul>
+              <li>不建议宣传成“完整 1:1 还原原神全部战斗系统”</li>
+              <li>不建议宣传成“大型正式服已长期压测稳定版本”</li>
+              <li>不建议宣传成“内容量已经非常丰富”</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stats reveal">
+      <div class="stats-grid">
+        <div class="stat"><strong>7</strong><span>已接入技能引擎的角色</span></div>
+        <div class="stat"><strong>5</strong><span>默认武器资源</span></div>
+        <div class="stat"><strong>16</strong><span>已支持的元素反应</span></div>
+        <div class="stat"><strong>58</strong><span>主占位符入口</span></div>
+        <div class="stat"><strong>4</strong><span>角色编队槽位</span></div>
+        <div class="stat"><strong>14</strong><span>权限节点</span></div>
+      </div>
+    </section>
+
+    <section id="wiki">
+      <div class="section-head reveal">
+        <div class="eyebrow">Wiki Index</div>
+        <h2>Wiki 导航</h2>
+        <p>这是站内总入口。点击任意卡片，可以直接跳到对应功能区继续阅读。</p>
+      </div>
+      <div class="grid3">
+        <a class="list card jump reveal" href="#systems">
+          <span class="kicker">System Map</span>
+          <h3>系统总览</h3>
+          <p>查看角色、武器、命座、展示层、桥接层和持久化的全局能力。</p>
+        </a>
+        <a class="list card jump reveal" href="#combat">
+          <span class="kicker">Combat</span>
+          <h3>战斗框架</h3>
+          <p>查看七元素、16 反应、ICD、附着、能量与伤害结算链路。</p>
+        </a>
+        <a class="list card jump reveal" href="#content">
+          <span class="kicker">Content</span>
+          <h3>角色与武器</h3>
+          <p>查看当前已实现角色、默认武器资源和怪物抗性内容库。</p>
+        </a>
+        <a class="list card jump reveal" href="#commands">
+          <span class="kicker">Control</span>
+          <h3>命令与 GUI</h3>
+          <p>查看命令入口、权限节点、角色 GUI、命座 GUI 和管理员 GUI。</p>
+        </a>
+        <a class="list card jump reveal" href="#integrations">
+          <span class="kicker">Bridge</span>
+          <h3>联动与配置</h3>
+          <p>查看 PlaceholderAPI、Mod 按键桥、MythicMobs 与配置文件结构。</p>
+        </a>
+        <a class="list card jump reveal" href="#persistence">
+          <span class="kicker">Runtime</span>
+          <h3>持久化与构建</h3>
+          <p>查看 playerdata.yml、保存生命周期、构建方式和项目成熟度判断。</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="systems">
+      <div class="section-head reveal">
+        <div class="eyebrow">Full Feature Map</div>
+        <h2>系统总览</h2>
+        <p>以下内容不是宣传语，而是基于当前源码、配置与资源文件实际存在的能力清单。</p>
+      </div>
+      <div class="grid3">
+        <article class="list card reveal">
+          <span class="kicker">Combat Core</span>
+          <h3>七元素与反应流水线</h3>
+          <p>支持元素附着、附着量、持续时间、标准 ICD、元素精通加成、怪物抗性、减抗上限与最终伤害结算。</p>
+          <ul>
+            <li>七元素基础倍率与反应倍率都可写表达式。</li>
+            <li>支持自定义变量、PlaceholderAPI 和 exp4j 公式解析。</li>
+            <li>冻结衰减、感电跳电、燃烧持续、草原核视觉都可配置。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Party System</span>
+          <h3>角色编队与当前出战槽位</h3>
+          <p>角色系统不再把武器塞进 GUI，而是专注 4 槽角色编队，战斗时直接检测玩家主手。</p>
+          <ul>
+            <li>支持 1 到 4 号角色槽位和当前选中槽。</li>
+            <li>切换角色后可自动尝试换到匹配武器。</li>
+            <li>若当前槽无有效角色，会自动归位到第一个有效槽。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Weapon Layer</span>
+          <h3>武器、精炼与被动效果</h3>
+          <p>武器系统支持定义、发放、识别、等级、精炼和战斗被动，并记忆每个角色上次使用的武器。</p>
+          <ul>
+            <li>只检测主手是否为已注册原神武器。</li>
+            <li>当前角色与武器类型匹配时进入角色战斗模式。</li>
+            <li>支持法器、单手剑、双手剑、长柄武器与弓类型。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Skill Engine</span>
+          <h3>统一角色技能引擎</h3>
+          <p>E、Q、普攻、重击、部分角色被动和运行时状态都接入统一战斗链路。</p>
+          <ul>
+            <li><span class="code">/ys skill e</span> 与 <span class="code">/ys skill q</span> 可直接触发技能。</li>
+            <li>近战角色走插件普攻/重击逻辑，弓角色保留各自实现。</li>
+            <li>技能释放失败会检查当前角色、武器匹配、冷却和能量。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Constellation</span>
+          <h3>命星与命座升级系统</h3>
+          <p>已接入命星物品、命座升级、总览 GUI、命座文本与部分命座效果的真实战斗联动。</p>
+          <ul>
+            <li>命星可发放、可消耗、可统计当前数量。</li>
+            <li>角色命座上限 6 命。</li>
+            <li>角色配置里可覆盖命座名称与描述。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Visual Layer</span>
+          <h3>侧边栏、伤害显示与占位符</h3>
+          <p>展示层不是附属功能，而是已形成可持续配置的面板体系。</p>
+          <ul>
+            <li>玩家级侧边栏开关、伤害显示开关。</li>
+            <li>默认、战斗、防御三套侧边栏模板。</li>
+            <li>58 个主占位符覆盖属性、角色、武器、冷却、元素与抗性。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Operations</span>
+          <h3>指令、管理员 GUI 与配置重载</h3>
+          <p>服主可以通过命令行和 GUI 双入口管理玩家、武器、角色、显示状态与当前元素。</p>
+          <ul>
+            <li>支持在线玩家选择、武器发放、数据查看、刷新属性。</li>
+            <li>管理员 GUI 内可切侧边栏、切伤害显示、清元素。</li>
+            <li>支持运行时配置重载。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Integration</span>
+          <h3>MythicMobs 与 Mod 按键桥</h3>
+          <p>插件能与外部内容系统协作，而不是封闭运行。</p>
+          <ul>
+            <li>MythicMobs 可按 <span class="code">mythic-mob-id</span> 匹配怪物抗性。</li>
+            <li>客户端按键桥支持 1-4 槽切人、E、Q、打开 GUI。</li>
+            <li>绑定有激活模式、冷却和是否吞原版按键的控制。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <span class="kicker">Persistence</span>
+          <h3>玩家数据持久化</h3>
+          <p>离线重连和插件重载之后，关键角色系统状态可以恢复。</p>
+          <ul>
+            <li>角色槽、当前选中槽、武器记忆、技能能量与冷却都会保存。</li>
+            <li>侧边栏开关、伤害显示开关、当前元素会保存。</li>
+            <li>部分角色运行时状态也会持久化恢复。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="combat">
+      <div class="section-head reveal">
+        <div class="eyebrow">Battle Framework</div>
+        <h2>战斗框架与反应细节</h2>
+        <p>插件的核心不是单个技能，而是完整的伤害链路：属性来源、元素附着、反应计算、怪物抗性、展示反馈与数据同步。</p>
+      </div>
+
+      <div class="combat">
+        <article class="panel card reveal">
+          <h3>16 种已支持反应</h3>
+          <p class="muted">反应不仅包含基础倍率，还包含消耗量、冷却窗口、范围、二次附着、护盾与草原核实体配置。</p>
+          <div class="reaction-grid">
+            <div class="reaction"><strong>增幅反应</strong><p>蒸发、融化</p></div>
+            <div class="reaction"><strong>转化反应</strong><p>超载、感电、超导、碎冰、扩散</p></div>
+            <div class="reaction"><strong>状态反应</strong><p>冻结、燃烧、结晶</p></div>
+            <div class="reaction"><strong>激化与草系链路</strong><p>原激化、超激化、蔓激化、绽放、超绽放、烈绽放</p></div>
+          </div>
+          <ul>
+            <li>默认标准 ICD 为 2.5 秒 / 3 hit，可配置起始偏移。</li>
+            <li>附着分普攻、重击、E、Q、下落五类强度入口。</li>
+            <li>元素精通对不同反应有单独权重，而不是统一倍率。</li>
+          </ul>
+        </article>
+
+        <article class="panel card reveal">
+          <h3>战斗结算轨迹</h3>
+          <div class="steps">
+            <div class="step"><b>01</b><div><strong>读取属性</strong><p>角色基础属性 + 武器属性/被动 + Lore 属性 + 配置默认值。</p></div></div>
+            <div class="step"><b>02</b><div><strong>判定当前模式</strong><p>只有已选角色存在，且主手武器与角色类型匹配时，角色战斗模式才激活。</p></div></div>
+            <div class="step"><b>03</b><div><strong>附着与 ICD</strong><p>按动作组、命中窗与附着量决定是否挂元素及其持续时间。</p></div></div>
+            <div class="step"><b>04</b><div><strong>触发反应</strong><p>处理消耗量、额外伤害、冻结与燃烧状态、草原核、护盾、扩散与减抗。</p></div></div>
+            <div class="step"><b>05</b><div><strong>应用怪物抗性</strong><p>优先 MythicMobs ID，匹配失败时回退原版实体类型抗性。</p></div></div>
+            <div class="step"><b>06</b><div><strong>输出展示</strong><p>战斗提示、伤害显示、侧边栏刷新、粒子/能量状态同步与持久化保存。</p></div></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid3" style="margin-top:18px">
+        <article class="list card reveal">
+          <h3>能量与产球</h3>
+          <p>角色能量、Q 最大能量、最近一次产球来源、粒子数量、持续时间都可读出并展示到侧边栏或 PlaceholderAPI。</p>
+          <ul>
+            <li>支持 <span class="code">%yuanshen_particle_status%</span> 一类的最近产球状态占位符。</li>
+            <li>侧边栏会自动补入“最近产球”这一实用行。</li>
+            <li>Yelan、Hu Tao、Xiangling 等角色已经接入对应技能能量流程。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <h3>属性覆盖到原版实体</h3>
+          <p>可选把原神计算后的生命、攻击、防御映射回 Bukkit 原版属性，用于与原版机制共存。</p>
+          <ul>
+            <li>可同步 <span class="code">MAX_HEALTH</span>、<span class="code">ATTACK_DAMAGE</span>。</li>
+            <li>可选把防御折算到 <span class="code">ARMOR</span>，默认关闭。</li>
+            <li>支持仅在角色模式激活时才接管原版属性。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <h3>Lore 属性解析</h3>
+          <p>可从主手和护甲 Lore 读取攻击、防御、生命、暴击、元素伤害、元素抗性和物理伤害等属性。</p>
+          <ul>
+            <li>默认读取主手和四件护甲。</li>
+            <li>默认关闭副手读取。</li>
+            <li>支持“全元素伤害”“全元素抗性”等聚合属性。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section id="content">
+      <div class="section-head reveal">
+        <div class="eyebrow">Playable Content</div>
+        <h2>角色、武器与当前资源内容库</h2>
+        <p>当前资源规模还不算大，但每个角色都已经挂接到技能引擎，武器也都带有基础属性和精炼被动。</p>
+      </div>
+
+      <article class="panel card reveal" style="margin-bottom:18px">
+        <h3>默认角色发放</h3>
+        <p class="muted">首次加入时可根据 <span class="code">starter-characters.yml</span> 自动发放默认角色。当前默认配置为 <strong>旅行者·风</strong>，放入第 1 槽。</p>
+        <div class="chips" style="margin-top:12px">
+          <span class="chip"><strong>角色 ID</strong> traveler_anemo</span>
+          <span class="chip"><strong>槽位</strong> 1</span>
+          <span class="chip"><strong>首进自动发放</strong> 可配置</span>
+        </div>
+      </article>
+
+      <div class="section-head reveal" style="margin-bottom:18px">
+        <h2>已实现角色</h2>
+        <p>以下 7 个角色已经有独立配置文件、战斗逻辑、能量与冷却处理，并接入技能引擎。</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>胡桃</h3><div class="meta"><span class="tag hot">5★</span><span class="tag fire">火</span><span class="tag">长柄武器</span></div></div>
+          <p>高生命模板角色，围绕 E 状态、低血加成、血梅香与爆发回血来实现战斗节奏。</p>
+          <ul>
+            <li>E 消耗当前生命百分比，进入彼岸蝶舞并提高额外伤害。</li>
+            <li>低血量可获得额外火伤加成与视觉反馈。</li>
+            <li>重击可挂血梅香，Q 带命中统计与治疗恢复。</li>
+            <li>被动可为队伍其他角色提供暴击率增益。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>香菱</h3><div class="meta"><span class="tag violet">4★</span><span class="tag fire">火</span><span class="tag">长柄武器</span></div></div>
+          <p>已实现锅巴、旋火轮与绝云朝天椒增益链路，是当前框架中战斗感较完整的火系角色之一。</p>
+          <ul>
+            <li>E 召唤锅巴持续喷火并反馈命中伤害。</li>
+            <li>Q 展开旋火轮，支持开场挥击和持续旋转伤害。</li>
+            <li>被动可生成可拾取辣椒，为玩家提供攻击力提升。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>迪卢克</h3><div class="meta"><span class="tag hot">5★</span><span class="tag fire">火</span><span class="tag">双手剑</span></div></div>
+          <p>围绕三段 E 和凤凰型 Q 实现，兼具前台爆发和持续火附魔。</p>
+          <ul>
+            <li>E 支持三段连斩和四秒连段窗口。</li>
+            <li>Q 具有爆发伤害、火焰凤凰前冲与附魔持续时间。</li>
+            <li>被动内置火伤提升，重击走近战范围斩击逻辑。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>刻晴</h3><div class="meta"><span class="tag hot">5★</span><span class="tag violet">雷</span><span class="tag">单手剑</span></div></div>
+          <p>完整度较高，已经实现雷楔投掷、回位、附魔、重击雷爆与多段 Q。</p>
+          <ul>
+            <li>E 投出雷楔，可二段回位并进入雷附魔状态。</li>
+            <li>重击带二段斩和雷爆额外伤害。</li>
+            <li>Q 为多段斩击后接终结伤害，并附带暴击率与充能增益。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>凝光</h3><div class="meta"><span class="tag violet">4★</span><span class="tag cool">岩</span><span class="tag">法器</span></div></div>
+          <p>法器角色已拥有星璇管理、璇玑屏与宝石齐射的完整核心形态。</p>
+          <ul>
+            <li>普攻积累星璇，重击按星璇数量叠加额外伤害。</li>
+            <li>E 生成璇玑屏，并有穿屏增伤被动。</li>
+            <li>Q 根据是否存在屏风增加宝石数量。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>旅行者·风</h3><div class="meta"><span class="tag hot">5★</span><span class="tag cool">风</span><span class="tag">单手剑</span></div></div>
+          <p>E 具备牵引、长按、切割，Q 具备龙卷推进和元素吸收，是现阶段风系样板角色。</p>
+          <ul>
+            <li>E 可持续牵引并分阶段结算伤害。</li>
+            <li>支持长按版本、持续吸附与释放击退。</li>
+            <li>被动已实现持续治疗和第五段风刃。</li>
+          </ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>夜兰</h3><div class="meta"><span class="tag hot">5★</span><span class="tag cool">水</span><span class="tag">弓</span></div></div>
+          <p>弓角色路线与近战角色分离实现，已包含破局矢、命索冲刺与协同水箭。</p>
+          <ul>
+            <li>重击与破局矢有各自蓄力时长和命中范围。</li>
+            <li>E 为高速穿梭标记并在结束时引爆。</li>
+            <li>Q 展开协同水箭，并具备爆发增伤曲线。</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section-head reveal" style="margin:28px 0 18px">
+        <h2>默认武器资源</h2>
+        <p>武器数据包含基础攻击、副词条、被动 ID 与精炼 1-5 各级数值。</p>
+      </div>
+
+      <div class="grid2">
+        <article class="list card reveal"><div class="cmd-head"><h3>和璞鸢</h3><div class="meta"><span class="tag hot">5★</span><span class="tag">长柄武器</span></div></div><p>基础攻击 674，副词条暴击率。被动为层数型攻击加成，满层后再给额外伤害加成。</p></article>
+        <article class="list card reveal"><div class="cmd-head"><h3>天空之卷</h3><div class="meta"><span class="tag hot">5★</span><span class="tag">法器</span></div></div><p>基础攻击 674，副词条攻击百分比。被动提供全元素伤害加成，并带触发型追击效果。</p></article>
+        <article class="list card reveal"><div class="cmd-head"><h3>试作古华</h3><div class="meta"><span class="tag violet">4★</span><span class="tag">双手剑</span></div></div><p>基础攻击 565，副词条攻击百分比。被动为概率触发的范围物理伤害。</p></article>
+        <article class="list card reveal"><div class="cmd-head"><h3>弓藏</h3><div class="meta"><span class="tag violet">4★</span><span class="tag">弓</span></div></div><p>基础攻击 510，副词条攻击百分比。被动提升普通攻击伤害，同时压低重击收益。</p></article>
+        <article class="list card reveal"><div class="cmd-head"><h3>黎明神剑</h3><div class="meta"><span class="tag cool">3★</span><span class="tag">单手剑</span></div></div><p>基础攻击 401，副词条暴击伤害。生命高于阈值时获得额外暴击率。</p></article>
+      </div>
+
+      <article class="panel card reveal" style="margin-top:18px">
+        <h3>怪物抗性默认资源</h3>
+        <p class="muted">当前仓库内置 2 个示例怪物抗性文件：<strong>僵尸</strong> 与 <strong>骷髅</strong>。每个文件都支持以下维度：</p>
+        <div class="chips" style="margin-top:12px">
+          <span class="chip">entity-type</span>
+          <span class="chip">mythic-mob-id</span>
+          <span class="chip">全元素抗性</span>
+          <span class="chip">单元素抗性</span>
+          <span class="chip">物理抗性</span>
+          <span class="chip">减抗上限</span>
+          <span class="chip">最终抗性上下限</span>
+        </div>
+      </article>
+    </section>
+
+    <section id="commands">
+      <div class="section-head reveal">
+        <div class="eyebrow">Control Surface</div>
+        <h2>命令系统、权限节点与 GUI</h2>
+        <p>命令不是演示级接口，而是已经支撑服主管理、玩家操作和运维维护的正式入口。</p>
+      </div>
+
+      <div class="cmd-grid">
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>插件控制</h3><button class="copy" data-copy="/ys reload">复制命令</button></div>
+          <span class="code">/ys reload</span>
+          <ul><li>重载主配置、角色配置、属性配置与侧边栏配置。</li><li>重载武器定义、角色定义和怪物抗性。</li><li>在线玩家会刷新属性、侧边栏与按键桥状态。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>属性与展示</h3><button class="copy" data-copy="/ys stats 玩家名">复制命令</button></div>
+          <span class="code">/ys stats [玩家]</span>
+          <ul><li>输出当前角色槽、当前角色、当前武器、当前元素。</li><li>输出攻击、防御、生命、暴击率、暴伤、精通、充能等数值。</li><li>胡桃等角色的特定运行状态也会追加展示。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>伤害显示</h3><button class="copy" data-copy="/ys damage toggle">复制命令</button></div>
+          <span class="code">/ys damage &lt;toggle|on|off&gt; [玩家]</span>
+          <ul><li>切换自己或他人的伤害显示。</li><li>设置结果会立即保存到 <span class="code">playerdata.yml</span>。</li><li>支持自用权限与他人管理权限分离。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>侧边栏显示</h3><button class="copy" data-copy="/ys sidebar toggle">复制命令</button></div>
+          <span class="code">/ys sidebar &lt;toggle|on|off&gt; [玩家]</span>
+          <ul><li>切换自己或他人的侧边栏显示。</li><li>会触发实时刷新或卸载侧边栏记分板。</li><li>设置同样会持久化保存。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>角色技能</h3><button class="copy" data-copy="/ys skill e">复制命令</button></div>
+          <span class="code">/ys skill &lt;e|q&gt;</span>
+          <ul><li>通过命令直接释放 E 或 Q。</li><li>自动检测当前角色、武器匹配、冷却、能量与目标。</li><li>成功施放后会重置普攻连段等角色运行状态。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>角色编队 GUI</h3><button class="copy" data-copy="/ys open">复制命令</button></div>
+          <span class="code">/ys open</span>
+          <ul><li>打开角色编队界面。</li><li>只允许放角色物品，不存武器。</li><li>点击槽位下方按钮可切换出战角色并查看命座。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>角色与武器列表</h3><button class="copy" data-copy="/ys list weapon">复制命令</button></div>
+          <span class="code">/ys list &lt;character|weapon&gt;</span>
+          <ul><li>读取当前已注册角色或武器定义列表。</li><li>用于发放前确认 ID、别名与资源是否加载成功。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>发放角色 / 武器 / 命星</h3><button class="copy" data-copy="/ys give character 刻晴 90 6">复制命令</button></div>
+          <span class="code">/ys give character &lt;角色&gt; [等级] [命座] [玩家]</span>
+          <span class="code block">/ys give weapon &lt;武器&gt; [等级] [精炼] [玩家]</span>
+          <span class="code block">/ys give constellation [数量] [玩家]</span>
+          <ul><li>支持按定义上限自动钳制等级、命座和精炼。</li><li>发放失败会检查背包空间与目标玩家是否在线。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>出战角色切换</h3><button class="copy" data-copy="/ys player set 1">复制命令</button></div>
+          <span class="code">/ys player set &lt;1|2|3|4&gt;</span>
+          <ul><li>切换当前角色槽位。</li><li>保存当前槽位到玩家数据。</li><li>切换后刷新属性、侧边栏和武器匹配状态。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>管理员 GUI</h3><button class="copy" data-copy="/ys admin">复制命令</button></div>
+          <span class="code">/ys admin</span>
+          <ul><li>打开腐竹管理主菜单。</li><li>可进入玩家列表、玩家详情、武器发放与配置重载入口。</li></ul>
+        </article>
+        <article class="list card reveal">
+          <div class="cmd-head"><h3>当前元素快捷设置</h3><button class="copy" data-copy="/ys 火">复制命令</button></div>
+          <span class="code">/ys &lt;火|水|冰|雷|风|岩|草|清除&gt;</span>
+          <ul><li><span class="code">/ys 火</span> 这种写法会自动按元素子命令处理。</li><li>设置结果会刷新侧边栏并保存到玩家数据。</li></ul>
+        </article>
+      </div>
+
+      <article class="panel card reveal" style="margin-top:18px">
+        <h3>权限节点</h3>
+        <p class="muted">插件在 <span class="code">plugin.yml</span> 中声明了 14 个权限节点，默认值已经按玩家自用与 OP 管理拆开。</p>
+        <div class="perms">
+          <div class="perm"><code>yuanshen.reload</code><span>重载配置，默认 op</span></div>
+          <div class="perm"><code>yuanshen.stats.self</code><span>查看自己的属性，默认 true</span></div>
+          <div class="perm"><code>yuanshen.stats.others</code><span>查看他人属性，默认 op</span></div>
+          <div class="perm"><code>yuanshen.damage.self</code><span>切自己的伤害显示，默认 true</span></div>
+          <div class="perm"><code>yuanshen.damage.others</code><span>切他人伤害显示，默认 op</span></div>
+          <div class="perm"><code>yuanshen.sidebar.self</code><span>切自己的侧边栏，默认 true</span></div>
+          <div class="perm"><code>yuanshen.sidebar.others</code><span>切他人侧边栏，默认 op</span></div>
+          <div class="perm"><code>yuanshen.character.gui</code><span>打开角色编队，默认 true</span></div>
+          <div class="perm"><code>yuanshen.character.give</code><span>发放角色物品，默认 op</span></div>
+          <div class="perm"><code>yuanshen.player.set</code><span>切换出战槽位，默认 true</span></div>
+          <div class="perm"><code>yuanshen.skill.cast</code><span>命令施法，默认 true</span></div>
+          <div class="perm"><code>yuanshen.element.self</code><span>设置当前元素，默认 true</span></div>
+          <div class="perm"><code>yuanshen.weapon.give</code><span>发放武器，默认 op</span></div>
+          <div class="perm"><code>yuanshen.admin.gui</code><span>打开管理员 GUI，默认 op</span></div>
+        </div>
+      </article>
+
+      <div class="timeline-grid" style="margin-top:18px">
+        <article class="list card reveal"><h3>角色编队 GUI</h3><p>27 格界面，核心布局包含 4 个角色槽、4 个状态按钮、帮助卡、状态卡、模式卡和切换说明。</p><ul><li>提示当前槽位、当前角色、主手武器状态和所需武器类型。</li><li>槽位按钮会根据是否选中、是否就绪、是否为空切换材质。</li><li>支持通过配置修改标题、布局、材质、自定义模型值和文案。</li></ul></article>
+        <article class="list card reveal"><h3>命座 GUI</h3><p>展示角色当前命座、下一命效果、命星消耗与总览信息，是角色成长的可视化入口。</p><ul><li>显示角色当前等级、命座与全部已解锁命座说明。</li><li>若命星不足会阻止升级。</li><li>若槽位没有角色，会给出明确阻断提示。</li></ul></article>
+        <article class="list card reveal"><h3>管理员 GUI</h3><p>服主不需要只靠命令行。管理员 GUI 已经覆盖玩家查看、武器发放和部分运维操作。</p><ul><li>主菜单支持玩家管理、配置重载、关闭面板。</li><li>玩家页支持角色/武器编辑、武器发放、数据查看、刷新属性。</li><li>还可切侧边栏、切伤害显示、清除当前元素。</li></ul></article>
+      </div>
+    </section>
+    <section id="integrations">
+      <div class="section-head reveal">
+        <div class="eyebrow">Display · Bridge · Config</div>
+        <h2>展示系统、联动接口与配置面</h2>
+        <p>这个插件的“可用性”来自完整的展示层和配置层，而不只是技能代码本身。</p>
+      </div>
+
+      <div class="int-grid">
+        <article class="list card reveal"><h3>侧边栏系统</h3><p>默认提供 <span class="code">default</span>、<span class="code">combat</span>、<span class="code">defense</span> 三套模板，支持标题、刷新频率、默认开关和占位符行配置。</p><ul><li>全局开关：<span class="code">sidebar.enabled</span>。</li><li>玩家默认是否开启：<span class="code">sidebar.default-enabled</span>。</li><li>会自动补入武器信息和最近产球状态。</li></ul></article>
+        <article class="list card reveal"><h3>PlaceholderAPI 扩展</h3><p>安装 PlaceholderAPI 后，插件会注册自己的扩展。属性、武器、角色、冷却、粒子、抗性都能读。</p><ul><li>支持角色名、角色槽、元素键、武器类型、武器精炼。</li><li>支持 E/Q 冷却文本、秒数和毫秒值。</li><li>支持七元素加成和七元素抗性，外加物伤与物抗。</li></ul></article>
+        <article class="list card reveal"><h3>Mod 按键桥</h3><p>通过插件消息通道把客户端按键映射到服务端命令，减少玩家必须敲命令的割裂感。</p><ul><li>默认绑定：1/2/3/4 切人，E 战技，Q 爆发，L 打开 GUI。</li><li>支持 <span class="code">always</span>、<span class="code">active_character</span>、<span class="code">yuanshen_weapon</span>、<span class="code">compatible_weapon</span> 四种激活模式。</li><li>支持每个绑定独立冷却和 <span class="code">consume-vanilla</span> 行为。</li></ul></article>
+        <article class="list card reveal"><h3>MythicMobs 桥接</h3><p>若服务端安装 MythicMobs，插件会反射读取活动怪物实例的 <span class="code">mobType</span> 来匹配抗性配置。</p><ul><li>桥接初始化失败时会退回原版实体类型匹配。</li><li>怪物抗性支持全元素、单元素、物理与减抗限制。</li></ul></article>
+        <article class="list card reveal"><h3>软依赖与兼容面</h3><p>当前声明的软依赖有 PlaceholderAPI、ProtocolLib 与 MythicMobs。</p><ul><li>当前源码中的实际桥接重点在 PlaceholderAPI 与 MythicMobs。</li><li>项目说明明确当前版本不再依赖 MMOItems。</li></ul></article>
+        <article class="list card reveal"><h3>公式配置能力</h3><p>主配置不仅是简单数字，而是表达式系统。</p><ul><li>元素倍率、反应倍率、冻结时长、聚怪范围等都可写数学表达式。</li><li>支持 <span class="code">custom_variables</span> 二次复用。</li><li>可结合 PlaceholderAPI 注入玩家等级等变量。</li></ul></article>
+      </div>
+
+      <div class="placeholder-grid" style="margin-top:18px">
+        <article class="list card reveal">
+          <h3>占位符分组一</h3>
+          <p>共 58 个主占位符入口，下面是核心类别。</p>
+          <details open>
+            <summary>基础属性类</summary>
+            <div class="detail-body"><div class="chips"><span class="code">%yuanshen_damage%</span><span class="code">%yuanshen_crit_rate%</span><span class="code">%yuanshen_crit_damage%</span><span class="code">%yuanshen_element_mastery%</span><span class="code">%yuanshen_energy_recharge%</span><span class="code">%yuanshen_healing_bonus%</span><span class="code">%yuanshen_defense%</span><span class="code">%yuanshen_max_health%</span><span class="code">%yuanshen_current_health%</span><span class="code">%yuanshen_current_health_percent%</span></div></div>
+          </details>
+          <details>
+            <summary>角色与武器类</summary>
+            <div class="detail-body"><div class="chips"><span class="code">%yuanshen_character%</span><span class="code">%yuanshen_character_id%</span><span class="code">%yuanshen_character_level%</span><span class="code">%yuanshen_character_constellation%</span><span class="code">%yuanshen_character_slot%</span><span class="code">%yuanshen_element%</span><span class="code">%yuanshen_element_key%</span><span class="code">%yuanshen_weapon%</span><span class="code">%yuanshen_weapon_id%</span><span class="code">%yuanshen_weapon_type%</span><span class="code">%yuanshen_weapon_level%</span><span class="code">%yuanshen_weapon_refinement%</span></div></div>
+          </details>
+          <details>
+            <summary>技能与状态类</summary>
+            <div class="detail-body"><div class="chips"><span class="code">%yuanshen_current_energy%</span><span class="code">%yuanshen_max_energy%</span><span class="code">%yuanshen_e_cooldown%</span><span class="code">%yuanshen_q_cooldown%</span><span class="code">%yuanshen_e_cooldown_seconds%</span><span class="code">%yuanshen_q_cooldown_seconds%</span><span class="code">%yuanshen_e_cooldown_ms%</span><span class="code">%yuanshen_q_cooldown_ms%</span><span class="code">%yuanshen_damage_display%</span><span class="code">%yuanshen_sidebar_enabled%</span></div></div>
+          </details>
+        </article>
+
+        <article class="list card reveal">
+          <h3>占位符分组二</h3>
+          <p>除战斗属性外，还支持产球状态和全元素增伤 / 抗性读取。</p>
+          <details open>
+            <summary>最近产球类</summary>
+            <div class="detail-body"><div class="chips"><span class="code">%yuanshen_particle_status%</span><span class="code">%yuanshen_particle_source%</span><span class="code">%yuanshen_particle_energy%</span><span class="code">%yuanshen_particle_count%</span><span class="code">%yuanshen_particle_element%</span><span class="code">%yuanshen_particle_seconds%</span></div></div>
+          </details>
+          <details>
+            <summary>元素 / 物理伤害加成</summary>
+            <div class="detail-body"><div class="chips"><span class="code">%yuanshen_fire_damage%</span><span class="code">%yuanshen_water_damage%</span><span class="code">%yuanshen_ice_damage%</span><span class="code">%yuanshen_electro_damage%</span><span class="code">%yuanshen_anemo_damage%</span><span class="code">%yuanshen_geo_damage%</span><span class="code">%yuanshen_dendro_damage%</span><span class="code">%yuanshen_physical_damage%</span></div></div>
+          </details>
+          <details>
+            <summary>元素 / 物理抗性</summary>
+            <div class="detail-body"><div class="chips"><span class="code">%yuanshen_fire_resistance%</span><span class="code">%yuanshen_water_resistance%</span><span class="code">%yuanshen_ice_resistance%</span><span class="code">%yuanshen_electro_resistance%</span><span class="code">%yuanshen_anemo_resistance%</span><span class="code">%yuanshen_geo_resistance%</span><span class="code">%yuanshen_dendro_resistance%</span><span class="code">%yuanshen_physical_resistance%</span></div></div>
+          </details>
+        </article>
+      </div>
+
+      <article class="panel card reveal" style="margin-top:18px">
+        <h3>配置文件入口</h3>
+        <p class="muted">服务端启动后，这些资源会生成到 <span class="code">plugins/Yuanshen/</span>。也就是说，服主能直接围绕这些文件扩展内容和调整数值。</p>
+        <div class="files">
+          <span class="file">config.yml</span><span class="file">attributes.yml</span><span class="file">sidebar.yml</span><span class="file">character-gui.yml</span><span class="file">starter-characters.yml</span><span class="file">mod-keybind.yml</span><span class="file">juese/*.yml</span><span class="file">weapons/*.yml</span><span class="file">mobs/*.yml</span><span class="file">plugin.yml</span>
+        </div>
+      </article>
+    </section>
+
+    <section id="persistence">
+      <div class="section-head reveal">
+        <div class="eyebrow">Runtime Safety</div>
+        <h2>玩家数据持久化与工程信息</h2>
+        <p>这个插件已经开始像一个长期维护项目一样处理状态保存、配置迁移、异步落盘和构建产物。</p>
+      </div>
+
+      <div class="timeline-grid">
+        <article class="list card reveal"><h3>保存文件与生命周期</h3><ul><li>玩家数据保存到 <span class="code">plugins/Yuanshen/playerdata.yml</span>。</li><li>玩家加入时加载，退出时保存并卸载内存状态。</li><li>插件关闭时会保存所有在线玩家后再清理缓存。</li><li>采用延迟写入 + 异步落盘，减少频繁 IO。</li></ul></article>
+        <article class="list card reveal"><h3>持久化内容</h3><ul><li>4 个角色槽位、当前选中槽位、角色槽内物品。</li><li>角色对应的武器记忆。</li><li>每个角色的能量、E 冷却时间、Q 冷却时间。</li><li>伤害显示开关、侧边栏开关、当前元素。</li><li>胡桃 E 状态、额外伤害、支援 Buff、重击冷却。</li><li>香菱辣椒 Buff 等部分运行时状态。</li></ul></article>
+        <article class="list card reveal"><h3>当前明确不持久化的部分</h3><ul><li>实体身上的临时元素附着。</li><li>血梅香目标跟踪等部分纯运行时对象。</li><li>某些正在持续演算中的临时实体状态。</li></ul></article>
+      </div>
+
+      <div class="grid2" style="margin-top:18px">
+        <article class="list card reveal"><h3>构建与运行要求</h3><ul><li>Java 21</li><li>Paper 1.21+，构建 API 为 <span class="code">1.21.4-R0.1-SNAPSHOT</span></li><li>Gradle ShadowJar 输出 <span class="code">build/libs/Yuanshen-1.0.jar</span></li><li>可用构建命令：<span class="code">./gradlew.bat compileJava</span>、<span class="code">./gradlew.bat clean shadowJar</span></li></ul></article>
+        <article class="list card reveal"><h3>工程成熟度判断</h3><ul><li>框架层成熟：角色、武器、编队、命座、GUI、持久化、展示层都已成体系。</li><li>玩法层持续打磨：元素反应还原度与单个角色细节仍在 Beta 迭代。</li><li>当前最适合定位为测试服 / 体验服 / 小规模玩法服核心战斗框架。</li></ul></article>
+      </div>
+    </section>
+
+    <footer class="card reveal">
+      <h3>Yuanshen · Minecraft Paper 原神战斗框架</h3>
+      <p class="muted">本页基于当前仓库源码、资源配置与文档整理，适合作为项目展示站、插件介绍页或对外说明页面。</p>
+      <div class="chips" style="justify-content:center">
+        <span class="chip"><strong>入口文件</strong> html/index.html</span>
+        <span class="chip"><strong>源码状态</strong> 2026-04-07</span>
+        <span class="chip"><strong>定位</strong> 战斗框架 Beta</span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+
+    document.addEventListener("click", async (event) => {
+      const button = event.target.closest(".copy");
+      if (!button) return;
+      const text = button.dataset.copy || "";
+      try {
+        await navigator.clipboard.writeText(text);
+        const old = button.textContent;
+        button.textContent = "已复制";
+        button.classList.add("ok");
+        setTimeout(() => {
+          button.textContent = old;
+          button.classList.remove("ok");
+        }, 1400);
+      } catch (error) {
+        button.textContent = "复制失败";
+        setTimeout(() => { button.textContent = "复制命令"; }, 1400);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Wiki - 玩家使用</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="home.html">首页</a>
+        <a href="features.html">功能总览</a>
+        <a href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a class="is-active" href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+    <div class="container sub-nav-wrap">
+      <nav class="sub-nav">
+        <a href="wiki.html">Wiki 首页</a>
+        <a href="wiki-install.html">安装部署</a>
+        <a class="is-active" href="wiki-player.html">玩家使用</a>
+        <a href="wiki-admin.html">管理维护</a>
+        <a href="wiki-config.html">配置扩展</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container wiki-layout">
+      <aside class="card wiki-sidebar reveal">
+        <h3>本页目录</h3>
+        <a class="is-active" href="#quickstart">快速上手</a>
+        <a href="#party">角色编队</a>
+        <a href="#weapon">主手武器</a>
+        <a href="#skills">技能释放</a>
+        <a href="#reactions">反应怎么触发</a>
+        <a href="#display">面板与显示</a>
+      </aside>
+
+      <div>
+        <section class="hero reveal">
+          <div class="eyebrow">Wiki · Player</div>
+          <h1>玩家使用<small>从编队、切人到反应触发的实际操作教程</small></h1>
+          <p class="lead">如果你是玩家，这一页才是“怎么用插件”的核心教程。</p>
+        </section>
+
+        <section id="quickstart" class="section">
+          <div class="section-head reveal"><h2>1. 快速上手流程</h2></div>
+          <article class="card reveal">
+            <div class="step-list">
+              <div class="step"><b>01</b><div><strong>打开角色编队</strong><p>输入 <span class="copyable">/ys open</span> 或使用按键桥的打开 GUI 键。</p></div></div>
+              <div class="step"><b>02</b><div><strong>把角色放进 1 到 4 号槽</strong><p>只有角色物品能放进编队 GUI。</p></div></div>
+              <div class="step"><b>03</b><div><strong>切换当前出战槽</strong><p>使用 <span class="copyable">/ys player set 1-4</span> 或按键桥默认的 1-4 键。</p></div></div>
+              <div class="step"><b>04</b><div><strong>拿对武器</strong><p>把与当前角色类型匹配的原神武器放到主手。</p></div></div>
+              <div class="step"><b>05</b><div><strong>开始战斗</strong><p>释放 E、Q，或者通过普攻/重击挂元素并触发反应。</p></div></div>
+            </div>
+          </article>
+        </section>
+
+        <section id="party" class="section">
+          <div class="section-head reveal"><h2>2. 角色编队</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li>角色编队 GUI 只放角色，不放武器。</li>
+              <li>总共有 4 个槽位，当前选中槽位决定你的出战角色。</li>
+              <li>如果某个槽位没有有效角色，切过去后只会切槽，不会进入角色模式。</li>
+              <li>若当前槽位角色无效，系统会尽量归位到第一个有效角色槽。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="weapon" class="section">
+          <div class="section-head reveal"><h2>3. 主手武器判定</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li>当前插件不在 GUI 里存武器，而是直接检测主手。</li>
+              <li>角色模式激活的标准流程是：<strong>已选角色存在 + 主手武器类型匹配</strong>。</li>
+              <li>比如刻晴需要单手剑，夜兰需要弓，凝光需要法器。</li>
+              <li>如果主手武器不匹配，角色技能和角色普攻逻辑不会按完整角色模式运行。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="skills" class="section">
+          <div class="section-head reveal"><h2>4. 技能怎么放</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li>命令施放：<span class="copyable">/ys skill e</span>、<span class="copyable">/ys skill q</span></li>
+              <li>按键桥默认绑定：<span class="copyable">E</span> 对应战技，<span class="copyable">Q</span> 对应爆发</li>
+              <li>侧边栏和占位符可以显示当前能量、E 冷却和 Q 冷却。</li>
+              <li>若技能没放出来，优先检查：当前角色、主手武器、冷却、能量、是否在线。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="reactions" class="section">
+          <div class="section-head reveal">
+            <h2>5. 反应怎么触发</h2>
+            <p>这一节专门回答“不是只有名字，实际怎么打出来”。</p>
+          </div>
+          <div class="reaction-matrix">
+            <article class="reaction-item reveal">
+              <strong>蒸发怎么打</strong>
+              <p>先让目标身上有 <strong>火</strong>，再用 <strong>水</strong> 打它，或者先挂 <strong>水</strong> 再用 <strong>火</strong> 打它。两种都会出蒸发，但当前源码里水打火更强、消耗也更高。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>融化怎么打</strong>
+              <p>先挂 <strong>冰</strong> 再上 <strong>火</strong>，或先挂 <strong>火</strong> 再上 <strong>冰</strong>。两种都会融化，但火打冰更强。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>超载怎么打</strong>
+              <p>让目标身上同时发生 <strong>火雷组合</strong>。常见做法是火角色先挂火，再让雷角色补刀，或反过来。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>感电怎么打</strong>
+              <p>先让目标带 <strong>水</strong>，再上 <strong>雷</strong>；或者先雷后水。触发后目标会进入持续跳电状态。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>冻结与碎冰怎么打</strong>
+              <p>先让目标同时吃到 <strong>水 + 冰</strong>，它会冻结。之后在本插件当前实现里，用 <strong>物理伤害</strong> 或 <strong>岩元素</strong> 再打它，就可能触发碎冰。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>超导怎么打</strong>
+              <p>让目标身上先有 <strong>冰</strong> 再上 <strong>雷</strong>，或者先有 <strong>雷</strong> 再上 <strong>冰</strong>。触发后会附带范围物理减抗。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>原激化 / 超激化 / 蔓激化怎么打</strong>
+              <p>先用 <strong>雷 + 草</strong> 把目标打进原激化。之后继续用 <strong>雷</strong> 打，会走超激化；继续用 <strong>草</strong> 打，会走蔓激化。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>绽放 / 超绽放 / 烈绽放怎么打</strong>
+              <p>先用 <strong>水 + 草</strong> 生成草原核。然后再让草原核吃到 <strong>雷</strong> 变超绽放，或吃到 <strong>火</strong> 变烈绽放。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>燃烧怎么打</strong>
+              <p>让 <strong>火</strong> 和 <strong>草</strong> 发生反应。触发后不是一下就结束，而是进入持续燃烧状态。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>扩散怎么打</strong>
+              <p>先让目标身上带 <strong>火 / 水 / 雷 / 冰</strong> 之一，再用 <strong>风</strong> 打。风本身不是直接扩散所有元素，而是扩散目标身上当前主导的可扩散元素。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>结晶怎么打</strong>
+              <p>先让目标身上带 <strong>火 / 水 / 雷 / 冰</strong> 之一，再用 <strong>岩</strong> 打。会掉落结晶碎片，拾取后给护盾。</p>
+            </article>
+            <article class="reaction-item reveal">
+              <strong>为什么有时不是你想要的反应</strong>
+              <p>因为源码会根据目标身上的附着量、冻结状态、感电双载体、激化状态和优先级来规划下一步反应，而不是单纯只看最后两次命中。</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="display" class="section">
+          <div class="section-head reveal"><h2>6. 面板与显示</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li>你可以用 <span class="copyable">/ys sidebar toggle</span> 切自己的侧边栏。</li>
+              <li>你可以用 <span class="copyable">/ys damage toggle</span> 切自己的伤害显示。</li>
+              <li>如果服里装了 PlaceholderAPI，这些数据还能接到外部菜单和计分板。</li>
+            </ul>
+          </article>
+        </section>
+
+        <footer class="card site-footer reveal">
+          <h3>下一步</h3>
+          <div class="button-row" style="justify-content:center;">
+            <a class="button secondary" href="wiki-admin.html">继续看管理维护</a>
+            <a class="button secondary" href="features.html">回到功能总览看反应细节</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
