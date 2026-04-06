@@ -1,0 +1,139 @@
+config-version: '2.1-character'
+enabled: true
+
+meta:
+  character-id: 'diluc'
+  display-name: '迪卢克'
+  element: 'element_fire'
+  weapon-type: 'claymore'
+  material: 'NETHER_STAR'
+  rarity: 5
+  default-level: 90
+  max-level: 90
+  aliases:
+    - '迪卢克'
+  tags:
+    - '火元素'
+    - '双手剑角色'
+    - 'pyro'
+    - 'claymore'
+    - '迪卢克'
+
+stats:
+  base-attack: 335
+  base-health: 12981
+  base-defense: 784
+  crit-rate: 0.192
+
+combat:
+  normal:
+    combo-reset-ms: 1500
+    attachment:
+      group: normal
+      aura: 1.0
+    segments:
+      - 0.89
+      - 0.88
+      - 1.09
+      - 1.34
+
+item:
+  material: 'NETHER_STAR'
+  display-name: '&6{character_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神角色'
+    - '&7元素: &f{element}'
+    - '&7武器: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7命座: &f{constellation}'
+    - ''
+    - '&7基础攻击: &f{base_attack}'
+    - '&7基础生命: &f{base_health}'
+    - '&7基础防御: &f{base_defense}'
+
+notifications:
+  e-cast: true
+  energy-after-e: false
+  q-cast: true
+  skill-damage-feedback: false
+
+passive:
+  dawn:
+    pyro-bonus: 0.20
+
+e:
+  enabled: true
+  cooldown-ms: 10000
+  attachment:
+    group: e
+    aura: 1.0
+  slash-1:
+    attachment:
+      group: e_slash_1
+      aura: 1.0
+  slash-2:
+    attachment:
+      group: e_slash_2
+      aura: 1.0
+  slash-3:
+    attachment:
+      group: e_slash_3
+      aura: 1.0
+  combo-window-ms: 4000
+  energy-gain-per-slash: 0
+  range: 4.6
+  radius: 1.8
+  angle-degrees: 95.0
+  max-targets: 5
+  aura-duration: 120
+  slash-1-damage-multiplier: 0.944
+  slash-2-damage-multiplier: 0.976
+  slash-3-damage-multiplier: 1.29
+
+charged:
+  enabled: true
+  require-sneaking: true
+  attachment:
+    group: charged
+    aura: 1.0
+  cooldown-ms: 1200
+  hunger-cost: 2
+  range: 4.2
+  radius: 2.6
+  max-targets: 4
+  damage-multiplier: 1.85
+
+q:
+  enabled: true
+  cooldown-ms: 12000
+  attachment:
+    group: q
+    aura: 1.0
+  burst:
+    attachment:
+      group: q_burst
+      aura: 1.0
+  phoenix:
+    attachment:
+      group: q_phoenix
+      aura: 1.0
+  energy-cost: 40
+  burst-radius: 4.0
+  burst-damage-multiplier: 2.04
+  phoenix-length: 13.0
+  phoenix-radius: 2.0
+  phoenix-damage-multiplier: 2.04
+  max-targets: 8
+  aura-duration: 160
+  infusion-duration-ticks: 240
+
+messages:
+  e-cast: '&6[迪卢克] 逆焰之刃第 {stage} 段命中。'
+  e-cooldown: '&c[迪卢克] E 冷却中，还剩 {time} 秒。'
+  energy: '&7[迪卢克] 当前能量：&f{energy}&7/&f{max_energy}'
+  q-cast: '&c[迪卢克] 黎明已释放，烈焰之鸟撕开前方。'
+  q-cooldown: '&c[迪卢克] Q 冷却中，还剩 {time} 秒。'
+  q-no-energy: '&c[迪卢克] Q 所需能量不足，当前 {energy}/{max_energy}。'
+  charged-cooldown: '&c[迪卢克] 重击冷却中，还剩 {time} 秒。'
+  charged-no-hunger: '&c[迪卢克] 饱食度不足，无法施放重击。'

@@ -1,262 +1,261 @@
-# 原神元素反应插件核心配置文件
-# 所有数值、文本、时长均可在此配置，无需修改代码
-# 颜色码使用&符号，例如&c=红色 &b=蓝色 &6=金色 &2=绿色
+config-version: '1.0-beta' # 主配置版本号，用于配置迁移和缺失补全
+debug: false # 兼容旧版调试开关，建议以 logging.debug 为准
 
-# ==================== 火元素配置 ====================
-fire_element:
-  # 基础数值配置
-  base_damage: 5.0                # 火元素基础附加伤害（点）
-  evaporation_multiplier: 1.5     # 蒸发倍率（火打水）
-  melt_multiplier: 2.0            # 融化倍率（火打冰）
-  burning_damage_per_tick: 0.5    # 燃烧每tick伤害（1秒=20tick）
-  burning_duration: 100           # 燃烧持续时长（tick）
-  overload_multiplier: 2.5        # 超载伤害倍率
-  burst_multiplier: 3.0           # 烈绽放倍率
-  fire_ticks: 100                 # 火焰燃烧tick数（对应游戏内火焰效果）
-  element_duration: 200           # 火元素附着持续时长（tick）
+logging: # 日志输出设置
+  debug: false # 是否输出调试日志，true=输出，false=关闭
+  cache-invalidation: false # 是否记录属性缓存失效日志，true=输出，false=关闭
+  combat-summary: false # 是否记录战斗汇总日志，true=输出，false=关闭
+  reaction-debug: false # 是否记录元素反应调试日志，true=输出，false=关闭
+  lore-debug: false # 是否记录 Lore 解析调试日志，true=输出，false=关闭
+  charged-debug: true # 是否记录重击相关调试日志，true=输出，false=关闭
+  dependency-fallbacks: true # 缺少 PlaceholderAPI / MythicMobs 等可选依赖时是否提示回退信息
+  missing-config-warnings: true # 配置节点缺失时是否打印警告
 
-  # 玩家提示消息（支持颜色码）
-  messages:
-    evaporation: "&c【蒸发】&f触发！额外造成%s点伤害，消耗敌方水元素！"
-    melt: "&c【融化】&f触发！额外造成%s点伤害，消耗敌方冰元素！"
-    burning: "&c【燃烧】&f触发！敌方每tick受到%s点伤害，持续%s秒！"
-    overload: "&c【超载】&f触发！爆炸造成%s点伤害，消耗敌方雷元素！"
-    burst: "&c【烈绽放】&f触发！造成%s点范围伤害，消耗敌方草元素！"
-    normal_damage: "&c触发！额外造成%s点伤害并给敌方附着火元素"
-    already_has_fire: "&c敌方已附着火元素，无额外伤害！"
-    no_lore: "[火元素] 玩家%s手持物品无「火元素」Lore，不触发效果"
+skill_trigger: # 技能触发方式设置；当前物品识别已改为内部标识，不再依赖 Lore 关键字
+  preserve_entity_interactions: true # 是否优先保留原版实体交互，true=优先交互，false=优先技能
 
-  # 后台日志消息（无颜色码）
-  logs:
-    evaporation: "[火元素-蒸发] 目标%s水元素已消耗，最终伤害：%s"
-    melt: "[火元素-融化] 目标%s冰元素已消耗，最终伤害：%s"
-    burning: "[火元素-燃烧] 目标%s被点燃，每tick伤害%s，持续%s秒"
-    overload: "[火元素-超载] 目标%s雷元素已消耗，爆炸伤害：%s"
-    burst: "[火元素-烈绽放] 目标%s草元素已消耗，范围伤害：%s"
-    remove_mark: "[火元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "火元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_evaporation_multiplier: "蒸发倍率：%s"
-    config_melt_multiplier: "融化倍率：%s"
-    config_burning_damage: "燃烧每tick伤害：%s"
-    config_element_duration: "元素过期时长：%s tick"
+character_switch: # 角色切换时的自动武器处理
+  auto_swap_weapon:
+    enabled: true # 切换角色时是否自动尝试切到匹配武器
+    remember_last_weapon: true # 是否记住每个角色上次使用的那把武器
 
-# ==================== 水元素配置 ====================
-water_element:
-  # 基础数值配置
-  base_damage: 5.0                # 水元素基础附加伤害（点）
-  evaporation_multiplier: 2.0     # 蒸发倍率（水打火）
-  electro_charge_multiplier: 1.2  # 感电伤害倍率
-  bloom_multiplier: 1.8           # 绽放倍率
-  slow_duration: 100              # 潮湿减速时长（tick）
-  slow_level: 1                   # 潮湿减速等级（1=轻微减速）
-  freeze_duration: 80             # 冻结时长（tick）
-  freeze_level: 10                # 冻结等级（10=完全无法移动）
-  electro_tick_interval: 20       # 感电触发间隔（tick）
-  electro_duration: 100           # 感电持续时长（tick）
-  element_duration: 200           # 水元素附着持续时长（tick）
+constellation_star: # 命星物品外观配置，显示可改但识别不靠名字/Lore
+  material: 'DIAMOND' # 材质，示例: DIAMOND / NETHER_STAR / PAPER
+  display-name: '&b命星' # 显示名称，支持 {amount}
+  custom-model-data: -1 # 自定义模型值，-1=不设置
+  lore:
+    - '&7用于提升角色命座。'
+    - '&7每次升级消耗 1 个命星。'
 
-  # 玩家提示消息
-  messages:
-    evaporation: "&b【蒸发】&f触发！额外造成%s点伤害，消耗敌方火元素！"
-    freeze: "&b【冻结】&f触发！敌方被冻结%s秒，额外造成%s点伤害！"
-    electro_charge: "&b【感电】&f触发！敌方每%s秒受到%s点伤害，持续%s秒！"
-    bloom: "&b【绽放】&f触发！生成草原核，造成%s点伤害！"
-    normal_damage: "&b触发！额外造成%s点伤害并给敌方附着水元素（潮湿）"
-    already_has_water: "&b敌方已附着水元素，无额外伤害！"
-    extinguish_fire: "&b熄灭了目标的火焰！"
-    no_lore: "[水元素] 玩家%s手持物品无「水元素」Lore，不触发效果"
+elements: # 元素附伤基础倍率配置，这些值会作为表达式解析
+  fire_base_damage: '1.0' # 火元素基础倍率，支持表达式/PAPI，示例: 1.0 或 1 + (%player_level% * 0.01)
+  water_base_damage: '1.0' # 水元素基础倍率，支持表达式/PAPI，示例: 1.0
+  ice_base_damage: '1.0' # 冰元素基础倍率，支持表达式/PAPI，示例: 1.0
+  electro_base_damage: '1.0' # 雷元素基础倍率，支持表达式/PAPI，示例: 1.0
+  anemo_base_damage: '1.0' # 风元素基础倍率，支持表达式/PAPI，示例: 1.0
+  geo_base_damage: '1.0' # 岩元素基础倍率，支持表达式/PAPI，示例: 1.0
+  dendro_base_damage: '1.0' # 草元素基础倍率，支持表达式/PAPI，示例: 1.0
 
-  # 后台日志消息
-  logs:
-    evaporation: "[水元素-蒸发] 目标%s火元素已消耗，最终伤害：%s"
-    freeze: "[水元素-冻结] 目标%s冰元素已消耗，最终伤害：%s"
-    electro_charge: "[水元素-感电] 目标%s雷元素触发感电，每%s秒伤害%s，持续%s秒"
-    bloom: "[水元素-绽放] 目标%s草元素已消耗，绽放伤害：%s"
-    remove_mark: "[水元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "水元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_evaporation_multiplier: "蒸发倍率：%s"
-    config_electro_charge_multiplier: "感电倍率：%s"
-    config_element_duration: "元素过期时长：%s tick"
+reactions: # 元素反应倍率公式，支持 PlaceholderAPI、${custom_variables}、exp4j 数学表达式
+  vaporize: '1.5 + (%player_level% * 0.01)' # 蒸发倍率，示例: 固定值 1.5 / 按等级成长 / 混合公式
+  melt: '2.0 + (%player_level% * 0.02)' # 融化倍率，示例: 2.0 + (%player_level% * 0.02)
+  overload: '2.75 + (%player_level% * 0.03)' # 超载倍率，示例: 2.75 + (%player_level% * 0.03)
+  electro_charge: '2.0 + (%player_level% * 0.01)' # 感电倍率，示例: 2.0 + (%player_level% * 0.01)
+  superconduct: '1.5 + (%player_level% * 0.005)' # 超导倍率，示例: 1.5 + (%player_level% * 0.005)
+  shatter: '3.0' # 碎冰倍率，示例: 3.0
+  aggravate: '1.8 + (%player_level% * 0.02)' # 超激化倍率，示例: 1.8 + (%player_level% * 0.02)
+  spread: '1.8 + (%player_level% * 0.02)' # 蔓激化倍率，示例: 1.8 + (%player_level% * 0.02)
+  swirl: '1.2 + (%player_level% * 0.01)' # 扩散倍率，示例: 1.2 + (%player_level% * 0.01)
+  crystal_shield: '3.0 + (%player_level% * 0.05)' # 结晶护盾值公式，结果单位=护盾点数
+  bloom: '2.0 + (%player_level% * 0.02)' # 绽放倍率，示例: 2.0 + (%player_level% * 0.02)
+  hyperbloom: '3.0 + (%player_level% * 0.025)' # 超绽放倍率，示例: 3.0 + (%player_level% * 0.025)
+  burgeon: '3.0 + (%player_level% * 0.03)' # 烈绽放倍率，示例: 3.0 + (%player_level% * 0.03)
+  burning: '0.25' # 燃烧单跳倍率，示例: 0.25
+  cooldown-ms: '500' # 元素反应统一触发间隔，结果单位=毫秒；同一攻击者对同一目标 0.5 秒内不会重复触发同类反应
+  cooldown-overrides:
+    crystal_shield: '1000'
+  consume:
+    vaporize_forward: '1.0' # 正向蒸发消耗量
+    vaporize_reverse: '0.5' # 反向蒸发消耗量
+    melt_forward: '1.0' # 正向融化消耗量
+    melt_reverse: '0.5' # 反向融化消耗量
+    overload: '1.0' # 超载消耗量
+    electro_charge: '0.4' # 感电初次触发消耗量
+    superconduct: '1.0' # 超导消耗量
+    freeze: '0.6' # 冻结消耗量
+    quicken: '0.3' # 原激化消耗量
+    bloom: '0.5' # 绽放消耗量
+    burning: '0.4' # 燃烧消耗量
+    crystal: '0.5' # 结晶消耗量
+    swirl: '0.5' # 扩散消耗量
 
-# ==================== 冰元素配置 ====================
-ice_element:
-  # 基础数值配置
-  base_damage: 5.0                # 冰元素基础附加伤害（点）
-  melt_multiplier: 1.5            # 融化倍率（冰打火）
-  superconduct_multiplier: 1.0    # 超导伤害倍率
-  shatter_multiplier: 2.5         # 碎冰伤害倍率
-  slow_duration: 120              # 冰缓速时长（tick）
-  slow_level: 2                   # 冰缓速等级
-  freeze_duration: 80             # 冻结时长（tick）
-  freeze_level: 10                # 冻结等级
-  element_duration: 200           # 冰元素附着持续时长（tick）
+effects: # 元素效果参数，支持 PlaceholderAPI、${custom_variables}、exp4j 数学表达式
+  freeze_duration: '80 + (%player_level% * 2)' # 冻结持续时间，结果单位=tick，20 tick=1秒
+  element_duration: '200' # 普通元素附着持续时间，结果单位=tick，示例: 200
+  freeze:
+    base_decay_per_second: '0.4' # 冻结量初始每秒衰减
+    decay_growth_per_second: '0.1' # 冻结量衰减速度每秒增加量
+    decay_recovery_per_second: '0.2' # 冻结结束后衰减速度每秒恢复量
+    shatter_threshold: '0.55' # 可触发碎冰的最低冻结量
+  electro_charge_duration: '100' # 感电持续时间，结果单位=tick
+  electro_charge_interval: '20' # 感电每跳间隔，结果单位=tick
+  electro_charge_jump_range: '13.0' # 感电传导水平半径，结果单位=格(block)
+  electro_charge_jump_height: '3.0' # 感电传导纵向高度，结果单位=格(block)
+  electro_charge_max_secondary_targets: '0' # 每次感电最多传导到几个额外目标，0=不设上限
+  electro_charge_secondary_damage_multiplier: '1.0' # 周围传导伤害倍率，1.0=与中心感电同伤
+  electro_charge_secondary_duration: '60' # 跳电附带的次级感电持续时间，结果单位=tick
+  electro_charge_transfer_aura: '0.2' # 对潮湿目标传递的雷附着量
+  electro_charge_tick_consume_water: '0.4' # 感电每跳消耗的水附着
+  electro_charge_tick_consume_electro: '0.4' # 感电每跳消耗的雷附着
+  overload_radius: '5.0' # 超载爆炸影响半径，结果单位=格(block)
+  superconduct_radius: '5.0' # 超导影响半径，结果单位=格(block)
+  superconduct_physical_resistance_reduction: '0.40' # 超导提供的物理减抗
+  superconduct_physical_resistance_duration: '240' # 超导物理减抗持续时间，结果单位=tick
+  burning_duration: '100 + (%player_level% * 5)' # 燃烧持续时间，结果单位=tick
+  burning_interval: '5' # 燃烧跳频，结果单位=tick
+  burning_damage_per_tick: '0.25' # 燃烧每跳伤害，结果单位=伤害点数
+  burning_damage_range: '1.0' # 燃烧伤害影响范围，结果单位=格(block)
+  burning_spread_aura: '0.4' # 燃烧对附近目标施加的火附着量
+  burning_tick_consume_dendro: '0.08' # 燃烧每跳消耗的草附着
+  burning_tick_refresh_pyro: '0.10' # 燃烧每跳补充的火附着
+  pull_range: '5 + floor(%player_level% / 10)' # 聚怪范围，结果单位=格(block)，示例使用 exp4j 的 floor()
+  seed_spawn_chance: '1.0' # 草原核生成概率，结果建议范围=0~1，示例: 0.5 / 1.0
+  shield_duration: '300' # 结晶护盾持续时间，结果单位=tick
+  crystallize_matching_element_absorption_multiplier: '2.5' # 同元素结晶护盾额外吸收倍率，2.5=100护盾可吸收250对应元素伤害
+  crystal_chip_expire_time: '300' # 结晶碎片存在时间，结果单位=tick
 
-  # 玩家提示消息
-  messages:
-    melt: "&9【融化】&f触发！额外造成%s点伤害，消耗敌方火元素！"
-    freeze: "&9【冻结】&f触发！敌方被冻结%s秒，额外造成%s点伤害！"
-    superconduct: "&9【超导】&f触发！降低敌方防御，额外造成%s点伤害！"
-    shatter: "&9【碎冰】&f触发！冻结目标受到%s点额外伤害！"
-    normal_damage: "&9触发！额外造成%s点伤害并给敌方附着冰元素"
-    already_has_ice: "&9敌方已附着冰元素，无额外伤害！"
-    no_lore: "[冰元素] 玩家%s手持物品无「冰元素」Lore，不触发效果"
+custom_variables: # 自定义公式变量，可在其他表达式里通过 ${变量名} 引用
+  player_power: '%player_level% * 2' # 示例变量，引用方式: ${player_power}，支持 PlaceholderAPI + 数学表达式
 
-  # 后台日志消息
-  logs:
-    melt: "[冰元素-融化] 目标%s火元素已消耗，最终伤害：%s"
-    freeze: "[冰元素-冻结] 目标%s水元素已消耗，最终伤害：%s"
-    superconduct: "[冰元素-超导] 目标%s雷元素已消耗，最终伤害：%s"
-    shatter: "[冰元素-碎冰] 目标%s被碎冰，额外伤害：%s"
-    remove_mark: "[冰元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "冰元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_melt_multiplier: "融化倍率：%s"
-    config_superconduct_multiplier: "超导倍率：%s"
-    config_element_duration: "元素过期时长：%s tick"
+element_mastery: # 元素精通对反应伤害的影响
+  enabled: true # 是否启用元素精通增伤，true=启用，false=关闭
+  coefficient: '2.78' # 精通公式系数，支持表达式，示例: 2.78
+  constant: '1400' # 精通公式常量，支持表达式，示例: 1400
+  base_coefficient: '2.78' # 基础系数备份值，通常与 coefficient 保持一致
+  base_constant: '1400' # 基础常量备份值，通常与 constant 保持一致
+  reaction_multipliers: # 不同反应吃精通的权重，支持表达式
+    vaporize: '1.0' # 蒸发权重，1.0=完整吃精通
+    melt: '1.0' # 融化权重，1.0=完整吃精通
+    overload: '0.8' # 超载权重，0.8=按 80% 精通收益
+    electro_charge: '0.8' # 感电权重，0.8=按 80% 精通收益
+    superconduct: '0.5' # 超导权重，0.5=按 50% 精通收益
+    swirl: '0.6' # 扩散权重，0.6=按 60% 精通收益
+    aggravate: '0.85' # 超激化权重，0.85=按 85% 精通收益
+    spread: '0.85' # 蔓激化权重，0.85=按 85% 精通收益
+    bloom: '0.8' # 绽放权重，0.8=按 80% 精通收益
+    hyperbloom: '0.85' # 超绽放权重，0.85=按 85% 精通收益
+    burgeon: '0.85' # 烈绽放权重，0.85=按 85% 精通收益
+    crystal_shield: '0.5' # 结晶护盾权重，0.5=按 50% 精通收益
+    burning: '0.6' # 燃烧权重，0.6=按 60% 精通收益
+    freeze: '0.5' # 冻结权重，0.5=按 50% 精通收益
+    default: '1.0' # 未单独配置反应的默认权重
 
-# ==================== 雷元素配置 ====================
-electro_element:
-  # 基础数值配置
-  base_damage: 5.0                # 雷元素基础附加伤害（点）
-  electro_charge_multiplier: 1.2  # 感电伤害倍率
-  overload_multiplier: 2.5        # 超载伤害倍率
-  superconduct_multiplier: 1.0    # 超导伤害倍率
-  aggravate_multiplier: 1.8       # 激化伤害倍率
-  electro_tick_interval: 20       # 感电触发间隔（tick）
-  electro_duration: 100           # 感电持续时长（tick）
-  element_duration: 200           # 雷元素附着持续时长（tick）
+messages: # 战斗提示文本
+  reactions: # 元素反应消息模板，可用占位符按消息实际逻辑注入
+    vaporize_forward: '&6[蒸发] 造成额外火元素伤害 &c{damage}&6。' # 火打水蒸发提示，{damage}=本次额外伤害
+    vaporize_reverse: '&9[蒸发] 造成额外水元素伤害 &b{damage}&9。' # 水打火蒸发提示，{damage}=本次额外伤害
+    melt_forward: '&b[融化] 造成额外冰元素伤害 &f{damage}&b。' # 冰打火融化提示，{damage}=本次额外伤害
+    melt_reverse: '&6[融化] 造成额外火元素伤害 &c{damage}&6。' # 火打冰融化提示，{damage}=本次额外伤害
+    overload: '&d[超载] 触发爆炸，额外伤害 &5{damage}&d。' # 超载提示，{damage}=本次额外伤害
+    electro_charge: '&d[感电] 持续放电，额外伤害 &5{damage}&d。' # 感电提示，{damage}=本次额外伤害
+    superconduct: '&d[超导] 造成范围伤害 &5{damage}&d，并削弱物理抗性。' # 超导提示，{damage}=本次额外伤害
+    freeze: '&b[冻结] 造成冰元素伤害 &3{damage}&b，冻结 &f{seconds}&b 秒。' # 冻结提示，{damage}=本次伤害, {seconds}=冻结秒数
+    shatter: '&7[碎冰] 造成额外物理伤害 &f{damage}&7。' # 碎冰提示，{damage}=本次额外伤害
+    quicken: '&e[原激化] 目标进入激化状态。' # 原激化提示，无额外占位符
+    aggravate: '&a[超激化] 造成额外伤害 &2{damage}&a。' # 超激化提示，{damage}=本次额外伤害
+    spread: '&e[蔓激化] 造成额外伤害 &a{damage}&e。' # 蔓激化提示，{damage}=本次额外伤害
+    bloom: '&a[绽放] 生成了草原核。' # 绽放提示，无额外占位符
+    burning: '&c[燃烧] 目标进入燃烧状态。' # 燃烧提示，无额外占位符
+    crystal: '&6[结晶] 吸收了 {elementName} 元素，获得护盾 &e{shield}&6。' # 结晶提示，{elementName}=元素名, {shield}=护盾值
+    swirl: '&7[扩散 {elementName}] 造成扩散伤害 &f{damage}&7。' # 扩散提示，{elementName}=元素名, {damage}=本次伤害
+    hyperbloom: '&d[超绽放] 造成追踪伤害 &5{damage}&d。' # 超绽放提示，{damage}=本次伤害
+    burgeon: '&c[烈绽放] 造成范围伤害 &6{damage}&c。' # 烈绽放提示，{damage}=本次伤害
+    normal_element: '&7[{elementName}] &f本次伤害 &c{damage}' # 普通元素附伤提示，{elementName}=元素名, {damage}=本次伤害
 
-  # 玩家提示消息
-  messages:
-    electro_charge: "&5【感电】&f触发！敌方每%s秒受到%s点伤害，持续%s秒！"
-    overload: "&5【超载】&f触发！爆炸造成%s点伤害，消耗敌方火元素！"
-    superconduct: "&5【超导】&f触发！降低敌方防御，额外造成%s点伤害！"
-    aggravate: "&5【激化】&f触发！草元素强化雷伤，额外造成%s点伤害！"
-    normal_damage: "&5触发！额外造成%s点伤害并给敌方附着雷元素"
-    already_has_electro: "&5敌方已附着雷元素，无额外伤害！"
-    no_lore: "[雷元素] 玩家%s手持物品无「雷元素」Lore，不触发效果"
+default_stats: # 玩家默认基础属性，这些值支持表达式，最终会被解析为数值
+  attack_damage: '1' # 默认攻击力，结果单位=点，示例: 1 / 5 + %player_level%
+  crit_rate: '0.05' # 默认暴击率，结果单位=比例(0-1)，示例: 0.05=5%
+  crit_damage: '0.5' # 默认暴击伤害，结果单位=比例(0-1)，示例: 0.5=50%
+  element_mastery: '0' # 默认元素精通，结果单位=点
+  energy_recharge: '0' # 默认充能效率加成，结果单位=比例(0-1)
+  healing_bonus: '0' # 默认治疗加成，结果单位=比例(0-1)
+  defense: '0' # 默认防御力，结果单位=点
+  health: '20' # 默认生命上限，结果单位=点
+  fire_damage: '0' # 默认火伤加成，结果单位=比例(0-1)
+  water_damage: '0' # 默认水伤加成，结果单位=比例(0-1)
+  ice_damage: '0' # 默认冰伤加成，结果单位=比例(0-1)
+  electro_damage: '0' # 默认雷伤加成，结果单位=比例(0-1)
+  anemo_damage: '0' # 默认风伤加成，结果单位=比例(0-1)
+  geo_damage: '0' # 默认岩伤加成，结果单位=比例(0-1)
+  dendro_damage: '0' # 默认草伤加成，结果单位=比例(0-1)
+  fire_resistance: '0' # 默认火元素抗性，结果单位=比例(0-1)
+  water_resistance: '0' # 默认水元素抗性，结果单位=比例(0-1)
+  ice_resistance: '0' # 默认冰元素抗性，结果单位=比例(0-1)
+  electro_resistance: '0' # 默认雷元素抗性，结果单位=比例(0-1)
+  anemo_resistance: '0' # 默认风元素抗性，结果单位=比例(0-1)
+  geo_resistance: '0' # 默认岩元素抗性，结果单位=比例(0-1)
+  dendro_resistance: '0' # 默认草元素抗性，结果单位=比例(0-1)
+  physical_resistance: '0' # 默认物理抗性，结果单位=比例(0-1)
 
-  # 后台日志消息
-  logs:
-    electro_charge: "[雷元素-感电] 目标%s水元素触发感电，每%s秒伤害%s，持续%s秒"
-    overload: "[雷元素-超载] 目标%s火元素已消耗，爆炸伤害：%s"
-    superconduct: "[雷元素-超导] 目标%s冰元素已消耗，最终伤害：%s"
-    aggravate: "[雷元素-激化] 目标%s草元素已消耗，激化伤害：%s"
-    remove_mark: "[雷元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "雷元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_electro_charge_multiplier: "感电倍率：%s"
-    config_overload_multiplier: "超载倍率：%s"
-    config_element_duration: "元素过期时长：%s tick"
+attribute_override: # 是否把原神计算后的属性同步到 Bukkit 原版属性
+  enabled: false # 总开关，true=同步原神属性到原版属性，false=保持当前仅插件内部计算
+  only-active-character-mode: true # 是否仅在角色模式激活时同步；true=拿着匹配原神武器才接管
+  max_health: true # 是否同步生命上限到 Attribute.MAX_HEALTH
+  attack_damage: true # 是否同步攻击力到 Attribute.ATTACK_DAMAGE
+  defense_to_armor: false # 是否把防御力同步到 Attribute.ARMOR；默认关闭，避免原版护甲减伤过强
+  armor-scale: 0.05 # defense_to_armor=true 时，最终护甲=防御力 * 该系数
+  armor-max: 30.0 # defense_to_armor=true 时的护甲上限
 
-# ==================== 风元素配置 ====================
-anemo_element:
-  # 基础数值配置
-  base_damage: 5.0                # 风元素基础附加伤害（点）
-  swirl_multiplier: 1.2           # 扩散伤害倍率
-  pull_range: 5                   # 聚怪范围（方块）
-  pull_strength: 1                # 聚怪强度（1-5）
-  element_duration: 200           # 风元素附着持续时长（tick）
-  swirl_duration: 100             # 扩散效果持续时长（tick）
+attachment: # 元素附着与标准 ICD 配置
+  standard-icd:
+    enabled: true # 是否启用标准附着内置冷却；true=按 2.5s/3hit 控制附着，false=每次都可附着
+    window-ms: 2500 # 标准 ICD 时间窗，结果单位=毫秒
+    hits: 3 # 标准 ICD 命中计数窗，默认每 3 次命中只有第 1 次附着
+    offset: 0 # 标准 ICD 起始偏移，0=第 1 次命中附着，1=第 2 次命中附着
+  aura:
+    normal: 1.0 # 普攻默认附着量，1.0=弱附着
+    charged: 1.0 # 重击默认附着量
+    skill: 1.0 # 战技默认附着量
+    burst: 1.0 # 爆发默认附着量
+    plunge: 1.0 # 下落攻击默认附着量
+    duration-tier:
+      weak-max: 0.5 # 弱附着上限，小于等于该值时按 weak-multiplier 计算附着持续时间
+      normal-max: 1.0 # 常规附着上限
+      strong-max: 2.0 # 强附着上限
+      weak-multiplier: 0.8 # 弱附着持续时间倍率
+      normal-multiplier: 1.0 # 常规附着持续时间倍率
+      strong-multiplier: 1.65 # 强附着持续时间倍率
+      massive-multiplier: 2.4 # 超强附着持续时间倍率
 
-  # 玩家提示消息
-  messages:
-    swirl_fire: "&7【扩散-火】&f触发！造成%s点范围伤害，附加燃烧效果！"
-    swirl_water: "&7【扩散-水】&f触发！造成%s点范围伤害，附加潮湿效果！"
-    swirl_ice: "&7【扩散-冰】&f触发！造成%s点范围伤害，附加缓速效果！"
-    swirl_electro: "&7【扩散-雷】&f触发！造成%s点范围伤害，附加感电效果！"
-    normal_damage: "&7触发！额外造成%s点伤害并给敌方附着风元素（聚怪）"
-    already_has_anemo: "&7敌方已附着风元素，无额外伤害！"
-    no_lore: "[风元素] 玩家%s手持物品无「风元素」Lore，不触发效果"
+damage_bonus: # 额外伤害加成配置，formula 支持 PlaceholderAPI、${custom_variables}、exp4j 表达式
+  health_bonus: # 基于生命值比例的额外伤害
+    enabled: false # 是否启用生命值额外伤害，true=启用，false=关闭
+    formula: '(%player_health% / %player_max_health%) * 0.5' # 生命值额外伤害公式，示例: 当前血量百分比 * 0.5
+  food_bonus: # 基于饱食度的额外伤害
+    enabled: false # 是否启用饱食度额外伤害，true=启用，false=关闭
+    formula: '(%player_food_level% / 20) * 0.3' # 饱食度额外伤害公式，示例: 饱食度百分比 * 0.3
 
-  # 后台日志消息
-  logs:
-    swirl_fire: "[风元素-扩散火] 目标%s火元素已扩散，范围伤害：%s"
-    swirl_water: "[风元素-扩散水] 目标%s水元素已扩散，范围伤害：%s"
-    swirl_ice: "[风元素-扩散冰] 目标%s冰元素已扩散，范围伤害：%s"
-    swirl_electro: "[风元素-扩散雷] 目标%s雷元素已扩散，范围伤害：%s"
-    remove_mark: "[风元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "风元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_swirl_multiplier: "扩散倍率：%s"
-    config_element_duration: "元素过期时长：%s tick"
+bloom_seed: # 草原核实体显示配置
+  duration: '200' # 草原核存在时间，结果单位=tick
+  max_nearby: '5' # 同一小范围内允许同时存在的草原核上限
+  max_triggered_per_attack: '5' # 单次火/雷命中最多可连锁触发的草原核数量
+  explosion_radius: '5.0' # 草原核自然爆炸半径，结果单位=格(block)
+  natural_damage_multiplier: '1.0' # 草原核自然爆炸伤害倍率，1.0=使用绽放基础伤害
+  player_damage_multiplier: '0.02' # 草原核对玩家/友方的伤害倍率
+  visual: # 草原核外观设置
+    custom_name: '§a草原核' # 草原核显示名称，单位=文本
+    visible: 'false' # 是否显示名称，true=显示，false=隐藏
+    particle_type: 'HAPPY_VILLAGER' # 粒子类型，单位=粒子ID
+    particle_count: '3' # 每次刷新的粒子数量，结果单位=个
+    particle_spread: '0.3,0.3,0.3' # 粒子扩散范围，格式=x,y,z
+    particle_speed: '0.02' # 粒子速度，结果单位=内部粒子速度参数
 
-# ==================== 岩元素配置 ====================
-geo_element:
-  # 基础数值配置
-  base_damage: 5.0                # 岩元素基础附加伤害（点）
-  crystal_shield_multiplier: 3.0  # 结晶护盾倍率（基础伤害*倍率=护盾值）
-  shield_duration: 200            # 护盾持续时长（tick）
-  element_duration: 200           # 岩元素附着持续时长（tick）
-  crystal_chip_expire_time: 600   # 结晶晶片过期时间（tick）
-  crystal_drop_chance: 1.0        # 结晶晶片掉落概率（0-1）
+hyperbloom: # 超绽放配置，这些值支持表达式
+  trigger_range: '6.0' # 超绽放触发搜索范围，结果单位=格(block)
+  homming_range: '15.0' # 追踪目标搜索范围，结果单位=格(block)
+  homing_speed: '0.3' # 追踪移动速度，结果单位=内部速度参数
+  max_homming_ticks: '100' # 最大追踪时间，结果单位=tick
+  explosion_radius: '1.0' # 爆炸半径，结果单位=格(block)
+  player_damage_multiplier: '0.05' # 超绽放对玩家/角色的伤害倍率
+  damage_multiplier: '3.0' # 伤害倍率，结果单位=倍率
+  mastery_coefficient: '1.8' # 元素精通附加系数，结果单位=倍率
 
-  # 玩家提示消息
-  messages:
-    crystal_fire: "&6【结晶-火】&f触发！生成火元素晶片，拾取获得%s点护盾！"
-    crystal_water: "&6【结晶-水】&f触发！生成水元素晶片，拾取获得%s点护盾！"
-    crystal_ice: "&6【结晶-冰】&f触发！生成冰元素晶片，拾取获得%s点护盾！"
-    crystal_electro: "&6【结晶-雷】&f触发！生成雷元素晶片，拾取获得%s点护盾！"
-    shield_apply: "&6【岩元素护盾】&f已生效！吸收%s点伤害，持续%s秒！"
-    normal_damage: "&6触发！额外造成%s点伤害并给敌方附着岩元素"
-    already_has_geo: "&6敌方已附着岩元素，无额外伤害！"
-    no_lore: "[岩元素] 玩家%s手持物品无「岩元素」Lore，不触发效果"
+burgeon: # 烈绽放配置，这些值支持表达式
+  trigger_range: '6.0' # 烈绽放触发搜索范围，结果单位=格(block)
+  explosion_radius: '5.0' # 爆炸半径，结果单位=格(block)
+  player_damage_multiplier: '0.05' # 烈绽放对玩家/角色的伤害倍率
+  damage_multiplier: '3.0' # 伤害倍率，结果单位=倍率
+  mastery_coefficient: '1.8' # 元素精通附加系数，结果单位=倍率
 
-  # 后台日志消息
-  logs:
-    crystal_fire: "[岩元素-结晶火] 目标%s火元素触发结晶，生成火晶片，护盾值：%s"
-    crystal_water: "[岩元素-结晶水] 目标%s水元素触发结晶，生成水晶片，护盾值：%s"
-    crystal_ice: "[岩元素-结晶冰] 目标%s冰元素触发结晶，生成冰晶片，护盾值：%s"
-    crystal_electro: "[岩元素-结晶雷] 目标%s雷元素触发结晶，生成雷晶片，护盾值：%s"
-    shield_apply: "[岩元素护盾] 玩家%s获得%s点护盾，持续%s秒"
-    remove_mark: "[岩元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "岩元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_crystal_shield_multiplier: "结晶护盾倍率：%s"
-    config_element_duration: "元素过期时长：%s tick"
+swirl: # 扩散配置，这些值支持表达式
+  range: '6.0' # 扩散影响范围，结果单位=格(block)
+  element_duration: '200' # 扩散后二次附着时间，结果单位=tick
+  aura_amount: '1.0' # 扩散附着强度，结果单位=倍率
+  damage_multiplier: '0.6' # 扩散伤害倍率，结果单位=倍率
 
-# ==================== 草元素配置 ====================
-dendro_element:
-  # 基础数值配置
-  base_damage: 5.0                # 草元素基础附加伤害（点）
-  bloom_multiplier: 1.8           # 绽放伤害倍率
-  burning_damage_per_tick: 0.5    # 燃烧每tick伤害
-  burning_duration: 100           # 燃烧持续时长（tick）
-  aggravate_multiplier: 1.8       # 激化伤害倍率
-  hyperbloom_multiplier: 2.2      # 超绽放伤害倍率
-  burgeon_multiplier: 3.0         # 烈绽放伤害倍率
-  element_duration: 200           # 草元素附着持续时长（tick）
-  seed_duration: 80               # 草原核持续时长（tick）
-
-  # 玩家提示消息
-  messages:
-    bloom: "&2【绽放】&f触发！生成草原核，造成%s点伤害！"
-    burning: "&2【燃烧】&f触发！敌方每tick受到%s点伤害，持续%s秒！"
-    aggravate: "&2【激化】&f触发！雷元素强化草伤，额外造成%s点伤害！"
-    hyperbloom: "&2【超绽放】&f触发！草原核触发雷伤，额外造成%s点伤害！"
-    burgeon: "&2【烈绽放】&f触发！草原核触发火伤，额外造成%s点伤害！"
-    normal_damage: "&2触发！额外造成%s点伤害并给敌方附着草元素"
-    already_has_dendro: "&2敌方已附着草元素，无额外伤害！"
-    no_lore: "[草元素] 玩家%s手持物品无「草元素」Lore，不触发效果"
-
-  # 后台日志消息
-  logs:
-    bloom: "[草元素-绽放] 目标%s水元素触发绽放，草原核伤害：%s"
-    burning: "[草元素-燃烧] 目标%s火元素触发燃烧，每tick伤害%s，持续%s秒"
-    aggravate: "[草元素-激化] 目标%s雷元素触发激化，额外伤害：%s"
-    hyperbloom: "[草元素-超绽放] 目标%s雷元素触发超绽放，额外伤害：%s"
-    burgeon: "[草元素-烈绽放] 目标%s火元素触发烈绽放，额外伤害：%s"
-    remove_mark: "[草元素] 已移除目标%s的%s标记"
-    expire_mark: "[元素过期] 目标%s的%s标记已移除"
-    config_loaded: "草元素配置加载完成："
-    config_base_damage: "基础伤害：%s"
-    config_bloom_multiplier: "绽放倍率：%s"
-    config_element_duration: "元素过期时长：%s tick"
+bloom_core: # 草原核基础实体属性，这些值主要作为字符串读取
+  float_offset: '0.8' # 悬浮高度偏移，结果单位=格(block)
+  is_small: 'true' # 是否使用小型展示实体，true=是，false=否
+  invulnerable: 'true' # 是否无敌，true=是，false=否
+  no_gravity: 'true' # 是否关闭重力，true=是，false=否
+mod_keybind_bridge:

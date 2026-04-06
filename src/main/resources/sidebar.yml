@@ -1,0 +1,120 @@
+config-version: '1.0-beta' # 侧边栏配置版本号
+
+sidebar: # 侧边栏系统总配置
+  enabled: true # 是否全局启用侧边栏功能
+  default-enabled: false # 新玩家默认是否开启侧边栏
+  update-interval-ticks: 20 # 侧边栏刷新间隔，单位=tick，20 tick=1秒
+  title: '&6原神属性' # 侧边栏标题
+  active-layout: 'default' # 当前启用的模板名称，可选: default / combat / defense
+
+  layouts: # 可选的侧边栏模板集合
+    default: # 默认综合属性模板
+      lines: # 按顺序显示的文本行，支持 %yuanshen_*% 占位符
+        - '&6当前角色 &f%yuanshen_character%' # 当前激活角色名称
+        - '&7角色槽位 &f%yuanshen_character_slot%' # 当前选中的角色槽位
+        - '&7当前元素 &f%yuanshen_element%' # 当前角色元素
+        - '&8&m----------------' # 分隔线
+        - '&e能量 &f%yuanshen_current_energy%&7/&f%yuanshen_max_energy%' # 当前能量 / 角色 Q 最大能量
+        - '&6E冷却 &f%yuanshen_e_cooldown%' # E 技能剩余冷却，冷却结束显示“就绪”
+        - '&dQ冷却 &f%yuanshen_q_cooldown%' # Q 技能剩余冷却，冷却结束显示“就绪”
+        - '&c攻击力 &f%yuanshen_damage%' # 攻击力
+        - '&b暴击率 &f%yuanshen_crit_rate%%' # 暴击率
+        - '&d暴击伤害 &f%yuanshen_crit_damage%%' # 暴击伤害
+        - '&6元素精通 &f%yuanshen_element_mastery%' # 元素精通
+        - '&a生命值 &f%yuanshen_current_health%&7/&f%yuanshen_max_health%' # 当前生命 / 最大生命
+        - '&3防御力 &f%yuanshen_defense%' # 防御力
+        - '&9充能效率 &f%yuanshen_energy_recharge%%' # 充能效率
+        - '&2治疗加成 &f%yuanshen_healing_bonus%%' # 治疗加成
+
+    combat: # 偏输出的战斗模板
+      lines: # 按顺序显示的文本行，支持 %yuanshen_*% 占位符
+        - '&c&l战斗面板' # 模板标题行
+        - '&7角色 &f%yuanshen_character%' # 当前激活角色名称
+        - '&7元素 &f%yuanshen_element%' # 当前角色元素
+        - '&e能量 &f%yuanshen_current_energy%&7/&f%yuanshen_max_energy%' # 当前能量 / 角色 Q 最大能量
+        - '&6E冷却 &f%yuanshen_e_cooldown%' # E 技能剩余冷却
+        - '&dQ冷却 &f%yuanshen_q_cooldown%' # Q 技能剩余冷却
+        - '&8&m----------------' # 分隔线
+        - '&c攻击力 &f%yuanshen_damage%' # 攻击力
+        - '&6火伤加成 &f%yuanshen_fire_damage%%' # 火元素伤害加成
+        - '&9水伤加成 &f%yuanshen_water_damage%%' # 水元素伤害加成
+        - '&b冰伤加成 &f%yuanshen_ice_damage%%' # 冰元素伤害加成
+        - '&5雷伤加成 &f%yuanshen_electro_damage%%' # 雷元素伤害加成
+        - '&a草伤加成 &f%yuanshen_dendro_damage%%' # 草元素伤害加成
+        - '&7物伤加成 &f%yuanshen_physical_damage%%' # 物理伤害加成
+        - '&a生命值 &f%yuanshen_current_health%&7/&f%yuanshen_max_health%' # 当前生命 / 最大生命
+
+    defense: # 偏生存的防御模板
+      lines: # 按顺序显示的文本行，支持 %yuanshen_*% 占位符
+        - '&b&l生存面板' # 模板标题行
+        - '&7角色 &f%yuanshen_character%' # 当前激活角色名称
+        - '&e能量 &f%yuanshen_current_energy%&7/&f%yuanshen_max_energy%' # 当前能量 / 角色 Q 最大能量
+        - '&6E冷却 &f%yuanshen_e_cooldown%' # E 技能剩余冷却
+        - '&dQ冷却 &f%yuanshen_q_cooldown%' # Q 技能剩余冷却
+        - '&8&m----------------' # 分隔线
+        - '&a生命上限 &f%yuanshen_max_health%' # 最大生命值
+        - '&3防御力 &f%yuanshen_defense%' # 防御力
+        - '&c火元素抗性 &f%yuanshen_fire_resistance%%' # 火元素抗性
+        - '&9水元素抗性 &f%yuanshen_water_resistance%%' # 水元素抗性
+        - '&b冰元素抗性 &f%yuanshen_ice_resistance%%' # 冰元素抗性
+        - '&5雷元素抗性 &f%yuanshen_electro_resistance%%' # 雷元素抗性
+        - '&7物理抗性 &f%yuanshen_physical_resistance%%' # 物理抗性
+        - '&2治疗加成 &f%yuanshen_healing_bonus%%' # 治疗加成
+
+reference: # 侧边栏和其他插件可直接使用的占位符速查
+  notes: # 说明信息
+    - '所有占位符前缀固定为 %yuanshen_*% ，可用于侧边栏、PAPI 兼容插件、菜单文本。' # 使用说明
+    - '百分比类占位符大多直接返回 0-100 的数值文本，写在文本里时通常再手动补一个 % 号。' # 百分比说明
+    - '冷却类占位符分为格式化文本、秒数、毫秒三种。' # 冷却说明
+
+  placeholders: # 全部已注册占位符
+    base: # 基础属性类
+      - '%yuanshen_damage% # 攻击力，别名: %yuanshen_attack% / %yuanshen_attack_damage%' # 攻击力占位符
+      - '%yuanshen_crit_rate% # 暴击率(0-100)，别名: %yuanshen_crit_rate_raw% 返回原始比例值' # 暴击率占位符
+      - '%yuanshen_crit_damage% # 暴击伤害(0-100)，别名: %yuanshen_crit_damage_raw% 返回原始比例值' # 暴击伤害占位符
+      - '%yuanshen_element_mastery% # 元素精通，别名: %yuanshen_em%' # 元素精通占位符
+      - '%yuanshen_energy_recharge% # 充能效率(0-100)，别名: %yuanshen_energy_recharge_raw% 返回原始比例值' # 充能效率占位符
+      - '%yuanshen_healing_bonus% # 治疗加成(0-100)，别名: %yuanshen_healing_bonus_raw% 返回原始比例值' # 治疗加成占位符
+      - '%yuanshen_defense% # 防御力' # 防御力占位符
+      - '%yuanshen_max_health% # 最大生命，别名: %yuanshen_health%' # 最大生命占位符
+      - '%yuanshen_current_health% # 当前生命值' # 当前生命占位符
+      - '%yuanshen_current_health_percent% # 当前生命百分比(0-100)' # 当前生命百分比占位符
+
+    character: # 角色与状态类
+      - '%yuanshen_character% # 当前角色名称' # 当前角色名占位符
+      - '%yuanshen_character_id% # 当前角色ID，例如 hutao / xiangling' # 当前角色ID占位符
+      - '%yuanshen_character_slot% # 当前角色槽位，别名: %yuanshen_slot%' # 当前槽位占位符
+      - '%yuanshen_element% # 当前元素中文名' # 当前元素名占位符
+      - '%yuanshen_element_key% # 当前元素键，例如 element_fire' # 当前元素键占位符
+      - '%yuanshen_damage_display% # 伤害显示是否开启，返回 true / false' # 伤害显示状态占位符
+      - '%yuanshen_sidebar_enabled% # 侧边栏是否开启，返回 true / false' # 侧边栏状态占位符
+
+    skill: # 当前角色能量与技能冷却类
+      - '%yuanshen_current_energy% # 当前角色当前能量，别名: %yuanshen_energy% / %yuanshen_skill_energy%' # 当前能量占位符
+      - '%yuanshen_max_energy% # 当前角色 Q 最大能量，别名: %yuanshen_skill_energy_max%' # 最大能量占位符
+      - '%yuanshen_e_cooldown% # 当前角色 E 冷却文本，别名: %yuanshen_skill_e_cooldown%' # E 冷却文本占位符
+      - '%yuanshen_q_cooldown% # 当前角色 Q 冷却文本，别名: %yuanshen_skill_q_cooldown%' # Q 冷却文本占位符
+      - '%yuanshen_e_cooldown_seconds% # 当前角色 E 冷却秒数，别名: %yuanshen_skill_e_cooldown_seconds%' # E 冷却秒数占位符
+      - '%yuanshen_q_cooldown_seconds% # 当前角色 Q 冷却秒数，别名: %yuanshen_skill_q_cooldown_seconds%' # Q 冷却秒数占位符
+      - '%yuanshen_e_cooldown_ms% # 当前角色 E 冷却毫秒数，别名: %yuanshen_skill_e_cooldown_ms%' # E 冷却毫秒占位符
+      - '%yuanshen_q_cooldown_ms% # 当前角色 Q 冷却毫秒数，别名: %yuanshen_skill_q_cooldown_ms%' # Q 冷却毫秒占位符
+
+    damage_bonus: # 元素 / 物理伤害加成类
+      - '%yuanshen_fire_damage% # 火元素伤害加成，别名: %yuanshen_pyro_damage%' # 火伤占位符
+      - '%yuanshen_water_damage% # 水元素伤害加成，别名: %yuanshen_hydro_damage%' # 水伤占位符
+      - '%yuanshen_ice_damage% # 冰元素伤害加成，别名: %yuanshen_cryo_damage%' # 冰伤占位符
+      - '%yuanshen_electro_damage% # 雷元素伤害加成' # 雷伤占位符
+      - '%yuanshen_anemo_damage% # 风元素伤害加成' # 风伤占位符
+      - '%yuanshen_geo_damage% # 岩元素伤害加成' # 岩伤占位符
+      - '%yuanshen_dendro_damage% # 草元素伤害加成' # 草伤占位符
+      - '%yuanshen_physical_damage% # 物理伤害加成' # 物伤占位符
+
+    resistance: # 元素 / 物理抗性类
+      - '%yuanshen_fire_resistance% # 火元素抗性，别名: %yuanshen_pyro_resistance%' # 火抗占位符
+      - '%yuanshen_water_resistance% # 水元素抗性，别名: %yuanshen_hydro_resistance%' # 水抗占位符
+      - '%yuanshen_ice_resistance% # 冰元素抗性，别名: %yuanshen_cryo_resistance%' # 冰抗占位符
+      - '%yuanshen_electro_resistance% # 雷元素抗性' # 雷抗占位符
+      - '%yuanshen_anemo_resistance% # 风元素抗性' # 风抗占位符
+      - '%yuanshen_geo_resistance% # 岩元素抗性' # 岩抗占位符
+      - '%yuanshen_dendro_resistance% # 草元素抗性' # 草抗占位符
+      - '%yuanshen_physical_resistance% # 物理抗性' # 物抗占位符

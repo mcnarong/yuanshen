@@ -1,0 +1,13 @@
+config-version: '2.1-split-directory'
+deprecated: true
+notice: '请改用 juese 文件夹与 starter-characters.yml，每个角色单独一个 yml。'
+active-config-root: 'juese/'
+active-starter-config: 'starter-characters.yml'
+files:
+  - 'juese/diluc.yml'
+  - 'juese/keqing.yml'
+  - 'juese/ningguang.yml'
+  - 'juese/夜兰.yml'
+  - 'juese/旅行者-风.yml'
+  - 'juese/胡桃.yml'
+  - 'juese/香菱.yml'

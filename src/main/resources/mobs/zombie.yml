@@ -1,0 +1,25 @@
+config-version: "1.0-beta" # 配置版本，用于后续自动补全和兼容升级
+enabled: true # 是否启用这个怪物的抗性配置，设为 false 后此文件不生效
+entity-type: ZOMBIE # 对应 Bukkit 实体类型名称，必须填写正确的怪物类型
+display-name: "僵尸" # 仅用于日志和阅读识别，不参与实际匹配
+
+resistances: # 抗性配置分组，下面所有数值都使用小数格式，0.10 代表 10%
+  all_element_resistance: 0.10 # 全元素抗性，会同时作用于火水冰雷风岩草七种元素伤害
+  fire_resistance: 0.00 # 火元素额外抗性，会和全元素抗性叠加计算
+  water_resistance: 0.00 # 水元素额外抗性，会和全元素抗性叠加计算
+  ice_resistance: 0.00 # 冰元素额外抗性，会和全元素抗性叠加计算
+  electro_resistance: 0.00 # 雷元素额外抗性，会和全元素抗性叠加计算
+  anemo_resistance: 0.00 # 风元素额外抗性，会和全元素抗性叠加计算
+  geo_resistance: 0.00 # 岩元素额外抗性，会和全元素抗性叠加计算
+  dendro_resistance: 0.00 # 草元素额外抗性，会和全元素抗性叠加计算
+  physical_resistance: 0.05 # 物理抗性，只影响物理伤害
+
+limits: # 最终抗性限制分组，用来限制抗性和减抗叠加后的结果
+  allow_negative_resistance: false # 是否允许最终抗性变成负数，false 表示最低按 0 处理
+  min_final_resistance: 0.00 # 最终抗性下限，allow_negative_resistance 为 false 时通常保持 0
+  max_final_resistance: 0.90 # 最终抗性上限，0.90 表示最多减伤 90%
+
+reduction-limits: # 减抗上限分组，用于限制运行时技能施加的减抗效果
+  max_all_element_reduction: 0.90 # 全元素减抗最多生效多少，0.90 表示最多减 90% 全元素抗性
+  max_single_element_reduction: 0.90 # 单元素减抗最多生效多少，适用于火水冰雷风岩草单独减抗
+  max_physical_reduction: 0.90 # 物理减抗最多生效多少，只影响 physical_resistance

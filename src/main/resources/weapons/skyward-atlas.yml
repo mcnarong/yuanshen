@@ -1,0 +1,52 @@
+config-version: '1.0-weapon'
+enabled: true
+
+meta:
+  name: '天空之卷'
+  weapon-type: 'catalyst'
+  material: 'ENCHANTED_BOOK'
+  rarity: 5
+  default-level: 90
+  max-level: 90
+  default-refinement: 1
+  max-refinement: 5
+
+item:
+  material: 'ENCHANTED_BOOK'
+  display-name: '&6{weapon_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神武器'
+    - '&7类型: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7精炼: &f{refinement}'
+    - ''
+    - '&7被动效果: &f{passive_summary}'
+
+stats:
+  base-attack: 674
+  attack-percent: 0.331
+
+passive:
+  id: 'atlas_orb_proc'
+  proc-chance: 0.50
+  proc-cooldown-ms: 30000
+  proc-duration-ticks: 300
+  proc-hits: 6
+
+refinements:
+  1:
+    all-element-damage-bonus: 0.12
+    proc-damage-multiplier: 1.60
+  2:
+    all-element-damage-bonus: 0.15
+    proc-damage-multiplier: 2.00
+  3:
+    all-element-damage-bonus: 0.18
+    proc-damage-multiplier: 2.40
+  4:
+    all-element-damage-bonus: 0.21
+    proc-damage-multiplier: 2.80
+  5:
+    all-element-damage-bonus: 0.24
+    proc-damage-multiplier: 3.20

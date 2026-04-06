@@ -1,0 +1,15 @@
+config-version: '1.0-starter' # ver
+starter: # starter
+  assign-on-first-join: true # 新玩家首次加入时是否自动发放默认角色；设为 false 后，无角色玩家仍可使用 /yuanshen ys
+  enabled: false # on
+  slot: 1 # slot
+  character-id: 'traveler_anemo' # id
+  item: # item
+    material: 'NETHER_STAR' # mat
+    name: '&a旅行者·风' # name
+    lore: # lore
+      - '&7原神角色槽位物品' # lore1
+      - '&7旅行者-风' # lore2
+      - '&7风系' # lore3
+      - '&7单手剑角色' # lore4
+      - '&8默认初始角色' # lore5

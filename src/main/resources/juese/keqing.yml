@@ -1,0 +1,146 @@
+config-version: '2.1-character'
+enabled: true
+
+meta:
+  character-id: 'keqing'
+  display-name: '刻晴'
+  element: 'element_electro'
+  weapon-type: 'sword'
+  material: 'NETHER_STAR'
+  rarity: 5
+  default-level: 90
+  max-level: 90
+  aliases:
+    - '刻晴'
+  tags:
+    - '雷元素'
+    - '单手剑角色'
+    - 'electro'
+    - 'sword'
+    - '刻晴'
+
+stats:
+  base-attack: 323
+  base-health: 13103
+  base-defense: 799
+  crit-damage: 0.384
+
+combat:
+  normal:
+    combo-reset-ms: 1500
+    attachment:
+      group: normal
+      aura: 1.0
+    segments:
+      - 0.41
+      - 0.41
+      - 0.54
+      - 0.31
+      - 0.67
+
+item:
+  material: 'NETHER_STAR'
+  display-name: '&6{character_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神角色'
+    - '&7元素: &f{element}'
+    - '&7武器: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7命座: &f{constellation}'
+    - ''
+    - '&7基础攻击: &f{base_attack}'
+    - '&7基础生命: &f{base_health}'
+    - '&7基础防御: &f{base_defense}'
+
+notifications:
+  e-cast: true
+  e-recast: true
+  energy-after-e: false
+  q-cast: true
+  skill-damage-feedback: false
+
+passive:
+  q:
+    buff-duration-ticks: 160
+    crit-rate-bonus: 0.15
+    energy-recharge-bonus: 0.15
+
+e:
+  enabled: true
+  cooldown-ms: 7500
+  attachment:
+    group: e
+    aura: 1.0
+  throw:
+    attachment:
+      group: e_throw
+      aura: 1.0
+  recast:
+    attachment:
+      group: e_recast
+      aura: 1.0
+  energy-gain: 0
+  throw-range: 6.0
+  stiletto-duration-ticks: 100
+  radius: 2.6
+  aura-duration: 120
+  throw-damage-multiplier: 1.68
+  recast-damage-multiplier: 1.68
+  infusion-duration-ticks: 100
+
+charged:
+  enabled: true
+  require-sneaking: true
+  attachment:
+    group: charged
+    aura: 1.0
+  thunderclap:
+    attachment:
+      group: charged_thunderclap
+      aura: 1.0
+  cooldown-ms: 900
+  hunger-cost: 2
+  range: 3.8
+  radius: 1.6
+  max-targets: 3
+  damage-multiplier: 1.28
+  second-slash-damage-multiplier: 1.12
+  thunderclap-damage-multiplier: 1.46
+
+q:
+  enabled: true
+  cooldown-ms: 12000
+  attachment:
+    group: q
+    aura: 1.0
+  slash:
+    attachment:
+      group: q_slash
+      aura: 1.0
+  finish:
+    attachment:
+      group: q_finish
+      aura: 1.0
+  energy-cost: 40
+  radius: 5.0
+  range: 8.0
+  path-radius: 1.15
+  fan-angle-degrees: 46.0
+  slash-count: 6
+  slash-damage-multiplier: 0.66
+  finish-range: 9.5
+  finish-path-radius: 1.35
+  finish-damage-multiplier: 1.89
+  aura-duration: 140
+
+messages:
+  e-cast: '&d[刻晴] 雷楔已投出，等待再次归位。'
+  e-recast: '&d[刻晴] 星斗归位，进入雷元素附魔状态。'
+  e-cooldown: '&c[刻晴] E 冷却中，还剩 {time} 秒。'
+  energy: '&7[刻晴] 当前能量：&f{energy}&7/&f{max_energy}'
+  q-cast: '&d[刻晴] 天街巡游已展开，雷光连斩覆盖周围。'
+  q-cooldown: '&c[刻晴] Q 冷却中，还剩 {time} 秒。'
+  q-no-energy: '&c[刻晴] Q 所需能量不足，当前 {energy}/{max_energy}。'
+  charged-cooldown: '&c[刻晴] 重击冷却中，还剩 {time} 秒。'
+  charged-no-hunger: '&c[刻晴] 饱食度不足，无法施放重击。'

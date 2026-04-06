@@ -1,0 +1,48 @@
+config-version: '1.0-weapon'
+enabled: true
+
+meta:
+  name: '弓藏'
+  weapon-type: 'bow'
+  material: 'BOW'
+  rarity: 4
+  default-level: 90
+  max-level: 90
+  default-refinement: 1
+  max-refinement: 5
+
+item:
+  material: 'BOW'
+  display-name: '&5{weapon_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神武器'
+    - '&7类型: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7精炼: &f{refinement}'
+    - ''
+    - '&7被动效果: &f{passive_summary}'
+
+stats:
+  base-attack: 510
+  attack-percent: 0.413
+
+passive:
+  id: 'normal_bonus_charged_penalty'
+
+refinements:
+  1:
+    normal-damage-bonus: 0.40
+    charged-damage-bonus: -0.10
+  2:
+    normal-damage-bonus: 0.50
+    charged-damage-bonus: -0.10
+  3:
+    normal-damage-bonus: 0.60
+    charged-damage-bonus: -0.10
+  4:
+    normal-damage-bonus: 0.70
+    charged-damage-bonus: -0.10
+  5:
+    normal-damage-bonus: 0.80
+    charged-damage-bonus: -0.10

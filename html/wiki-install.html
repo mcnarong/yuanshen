@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Wiki - 安装部署</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="home.html">首页</a>
+        <a href="features.html">功能总览</a>
+        <a href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a class="is-active" href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+    <div class="container sub-nav-wrap">
+      <nav class="sub-nav">
+        <a href="wiki.html">Wiki 首页</a>
+        <a class="is-active" href="wiki-install.html">安装部署</a>
+        <a href="wiki-player.html">玩家使用</a>
+        <a href="wiki-admin.html">管理维护</a>
+        <a href="wiki-config.html">配置扩展</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container wiki-layout">
+      <aside class="card wiki-sidebar reveal">
+        <h3>本页目录</h3>
+        <a class="is-active" href="#requirements">环境要求</a>
+        <a href="#build">构建插件</a>
+        <a href="#install">安装到服务端</a>
+        <a href="#first-run">首次启动</a>
+        <a href="#deps">可选依赖</a>
+      </aside>
+
+      <div>
+        <section class="hero reveal">
+          <div class="eyebrow">Wiki · Install</div>
+          <h1>安装部署<small>从源码构建到服务端落地</small></h1>
+          <p class="lead">这一页面向第一次把插件跑起来的人。流程尽量按最短路径写，不绕。</p>
+        </section>
+
+        <section id="requirements" class="section">
+          <div class="section-head reveal"><h2>1. 环境要求</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li>Java 21</li>
+              <li>Paper 1.21+</li>
+              <li>源码当前使用的 Paper API 为 <span class="copyable">1.21.4-R0.1-SNAPSHOT</span></li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="build" class="section">
+          <div class="section-head reveal"><h2>2. 构建插件</h2></div>
+          <article class="card reveal">
+            <p>在项目根目录执行以下命令：</p>
+            <div class="button-row" style="margin-top:12px;">
+              <button class="copy-button" data-copy="./gradlew.bat compileJava">复制 compileJava</button>
+              <button class="copy-button" data-copy="./gradlew.bat clean shadowJar">复制 shadowJar</button>
+            </div>
+            <div class="code-block">./gradlew.bat compileJava</div>
+            <div class="code-block">./gradlew.bat clean shadowJar</div>
+            <ul>
+              <li>最终产物路径：<span class="copyable">build/libs/Yuanshen-1.0.jar</span></li>
+              <li>ShadowJar 会生成不带 classifier 的最终 JAR。</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="install" class="section">
+          <div class="section-head reveal"><h2>3. 安装到服务端</h2></div>
+          <article class="card reveal">
+            <ol>
+              <li>停止 Paper 服务端。</li>
+              <li>把 <span class="copyable">build/libs/Yuanshen-1.0.jar</span> 放到服务端的 <span class="copyable">plugins/</span> 目录。</li>
+              <li>启动服务端，等待插件首次生成数据目录。</li>
+            </ol>
+          </article>
+        </section>
+
+        <section id="first-run" class="section">
+          <div class="section-head reveal"><h2>4. 首次启动后会生成什么</h2></div>
+          <article class="card reveal">
+            <p>服务端启动后，插件会在 <span class="copyable">plugins/Yuanshen/</span> 下生成和同步资源配置。</p>
+            <div class="file-row" style="margin-top:12px;">
+              <span class="file-chip">config.yml</span>
+              <span class="file-chip">attributes.yml</span>
+              <span class="file-chip">sidebar.yml</span>
+              <span class="file-chip">character-gui.yml</span>
+              <span class="file-chip">starter-characters.yml</span>
+              <span class="file-chip">mod-keybind.yml</span>
+              <span class="file-chip">playerdata.yml</span>
+              <span class="file-chip">juese/*.yml</span>
+              <span class="file-chip">weapons/*.yml</span>
+              <span class="file-chip">mobs/*.yml</span>
+            </div>
+          </article>
+        </section>
+
+        <section id="deps" class="section">
+          <div class="section-head reveal"><h2>5. 可选依赖</h2></div>
+          <article class="card reveal">
+            <ul>
+              <li>PlaceholderAPI：启用 `%yuanshen_*%` 占位符和外部面板联动。</li>
+              <li>MythicMobs：按 Mythic 怪物 ID 应用怪物抗性。</li>
+              <li>ProtocolLib：当前在软依赖声明中存在，但当前源码桥接重点不是它。</li>
+            </ul>
+          </article>
+        </section>
+
+        <footer class="card site-footer reveal">
+          <h3>下一步</h3>
+          <div class="button-row" style="justify-content:center;">
+            <a class="button secondary" href="wiki-player.html">继续看玩家使用</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

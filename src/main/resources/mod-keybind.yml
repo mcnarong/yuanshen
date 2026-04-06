@@ -1,0 +1,67 @@
+mod_keybind_bridge:
+  enabled: true
+  default-cooldown-ms: 150
+  # Key examples:
+  #   "1"
+  #   "Y"
+  #   "F"
+  #   "SPACE"
+  #   "LEFT_SHIFT"
+  #   "key.keyboard.right.alt"
+  #
+  # consume-vanilla=true will try to block the original key behavior on the client.
+  # activation-mode options:
+  #   compatible_weapon  -> current character exists and main-hand Yuanshen weapon matches that character type
+  #   yuanshen_weapon    -> main hand is any Yuanshen weapon
+  #   active_character   -> player currently has a selected Yuanshen character
+  #   always             -> always active
+  bindings:
+    slot_1:
+      enabled: true
+      key: "1"
+      command: "/ys player set 1"
+      activation-mode: "active_character"
+      cooldown-ms: 120
+      consume-vanilla: true
+    slot_2:
+      enabled: true
+      key: "2"
+      command: "/ys player set 2"
+      activation-mode: "active_character"
+      cooldown-ms: 120
+      consume-vanilla: true
+    slot_3:
+      enabled: true
+      key: "3"
+      command: "/ys player set 3"
+      activation-mode: "active_character"
+      cooldown-ms: 120
+      consume-vanilla: true
+    slot_4:
+      enabled: true
+      key: "4"
+      command: "/ys player set 4"
+      activation-mode: "active_character"
+      cooldown-ms: 120
+      consume-vanilla: true
+    elemental_skill:
+      enabled: true
+      key: "E"
+      command: "/ys skill e"
+      activation-mode: "compatible_weapon"
+      cooldown-ms: 150
+      consume-vanilla: true
+    elemental_burst:
+      enabled: true
+      key: "Q"
+      command: "/ys skill q"
+      activation-mode: "compatible_weapon"
+      cooldown-ms: 150
+      consume-vanilla: true
+    open_gui:
+      enabled: true
+      key: "L"
+      command: "/ys open"
+      activation-mode: "always"
+      cooldown-ms: 150
+      consume-vanilla: true

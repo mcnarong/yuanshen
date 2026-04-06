@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Yuanshen 官网首页</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a class="is-active" href="home.html">首页</a>
+        <a href="features.html">功能总览</a>
+        <a href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero reveal">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Project Overview · 2026-04-07</div>
+            <h1>Yuanshen<small>把角色、元素、武器、命座与战斗逻辑带进 Minecraft Paper 服务端</small></h1>
+            <p class="lead">
+              这是一个正在持续开发中的原神战斗框架 Beta，而不是单一的元素附伤插件。
+              当前源码已经覆盖角色编队、武器精炼、命座升级、统一技能引擎、七元素与 16 种反应、
+              侧边栏和 PlaceholderAPI、管理员 GUI、Mod 按键桥、怪物抗性以及玩家数据持久化。
+            </p>
+            <div class="tag-row" style="margin-top:22px;">
+              <span class="pill"><strong>版本</strong> 1.0-beta</span>
+              <span class="pill"><strong>平台</strong> Paper 1.21+</span>
+              <span class="pill"><strong>JDK</strong> Java 21</span>
+              <span class="pill"><strong>产物</strong> Yuanshen-1.0.jar</span>
+            </div>
+            <div class="button-row" style="margin-top:24px;">
+              <a class="button primary" href="wiki.html">进入使用 Wiki</a>
+              <a class="button secondary" href="features.html">查看全部功能</a>
+            </div>
+          </div>
+          <aside class="hero-side">
+            <div class="card">
+              <h3>当前定位</h3>
+              <ul>
+                <li>适合测试服、体验服、小规模私服</li>
+                <li>框架层已经成熟，内容量仍在扩展</li>
+                <li>适合作为原神式玩法服的核心战斗底座</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>当前不建议宣传为</h3>
+              <ul>
+                <li>完整 1:1 原神全系统复刻</li>
+                <li>大型正式服长期稳定压测版本</li>
+                <li>已经拥有大量角色和武器内容库的成品</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="metric-grid reveal">
+          <div class="metric"><strong>7</strong><span>已接入技能引擎的角色</span></div>
+          <div class="metric"><strong>5</strong><span>默认武器资源</span></div>
+          <div class="metric"><strong>16</strong><span>元素反应</span></div>
+          <div class="metric"><strong>58</strong><span>主占位符入口</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Site Map</div>
+          <h2>站点导航</h2>
+          <p>官网内容与教程内容已经分开。功能介绍走官网页，安装与使用步骤走 Wiki 页。</p>
+        </div>
+        <div class="panel-grid-3">
+          <a class="card link-card reveal" href="features.html">
+            <span class="kicker">Systems</span>
+            <h3>功能总览</h3>
+            <p>查看战斗框架、元素反应、展示层、桥接层和配置能力。</p>
+          </a>
+          <a class="card link-card reveal" href="content.html">
+            <span class="kicker">Content</span>
+            <h3>内容资源</h3>
+            <p>查看当前已实现角色、默认武器资源和怪物抗性示例。</p>
+          </a>
+          <a class="card link-card reveal" href="commands.html">
+            <span class="kicker">Operations</span>
+            <h3>指令与 GUI</h3>
+            <p>查看命令、权限节点、角色编队、命座和管理员 GUI。</p>
+          </a>
+          <a class="card link-card reveal" href="wiki.html">
+            <span class="kicker">Wiki</span>
+            <h3>使用教程 Wiki</h3>
+            <p>从安装部署到玩家使用，再到管理维护和配置扩展。</p>
+          </a>
+          <a class="card link-card reveal" href="wiki-player.html">
+            <span class="kicker">Guide</span>
+            <h3>玩家使用教程</h3>
+            <p>学习怎么编队、切人、配武器、放技能和打反应。</p>
+          </a>
+          <a class="card link-card reveal" href="wiki-admin.html">
+            <span class="kicker">Admin</span>
+            <h3>管理维护教程</h3>
+            <p>学习怎么发放内容、重载配置、排查问题与管理玩家。</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Highlights</div>
+          <h2>你会在这个项目里看到什么</h2>
+          <p>首页只给概览，细节已经拆到独立页面。</p>
+        </div>
+        <div class="panel-grid-2">
+          <article class="card reveal">
+            <span class="kicker">Framework</span>
+            <h3>完整系统，不是单点插件</h3>
+            <ul>
+              <li>角色系统、武器系统、命座系统、编队系统是独立层。</li>
+              <li>技能引擎和反应系统是核心战斗层。</li>
+              <li>侧边栏、PAPI、GUI、按键桥和持久化是可用性层。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <span class="kicker">Wiki First</span>
+            <h3>使用教程和宣传页分离</h3>
+            <ul>
+              <li>官网页负责展示“插件有什么”。</li>
+              <li>Wiki 页负责解释“插件怎么装、怎么用、怎么配”。</li>
+              <li>反应触发规则已单独写成教程和速查说明。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <footer class="card site-footer reveal">
+        <h3>Yuanshen · Minecraft Paper 原神战斗框架</h3>
+        <p>当前站点已拆分为多页面结构。若从仓库根目录打开入口，建议直接进入 <span class="copyable">html/home.html</span>。</p>
+      </footer>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

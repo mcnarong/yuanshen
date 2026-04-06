@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08131c">
+  <title>Yuanshen 功能总览</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand" href="home.html">
+        <div class="brand-mark">YS</div>
+        <div class="brand-copy">
+          <strong>Yuanshen</strong>
+          <span>Minecraft Paper 原神战斗框架</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="home.html">首页</a>
+        <a class="is-active" href="features.html">功能总览</a>
+        <a href="content.html">内容资源</a>
+        <a href="commands.html">指令与 GUI</a>
+        <a href="wiki.html">Wiki</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <section class="hero reveal">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Feature Map</div>
+            <h1>功能总览<small>系统能力、战斗链路、反应触发规则与联动接口</small></h1>
+            <p class="lead">
+              这一页负责讲清楚“插件到底实现了什么”，尤其是反应系统如何判定。
+              这里写的是基于当前源码与配置整理出的实际行为，不是泛泛而谈的宣传词。
+            </p>
+          </div>
+          <aside class="hero-side">
+            <div class="card">
+              <h3>阅读建议</h3>
+              <ul>
+                <li>想知道系统边界：看“系统构成”</li>
+                <li>想知道反应怎么打：看“反应触发规则”</li>
+                <li>想知道怎么实际操作：转到 Wiki 玩家教程</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Framework Layers</div>
+          <h2>系统构成</h2>
+          <p>插件当前最成熟的是整套框架层，而不仅仅是元素反应本身。</p>
+        </div>
+        <div class="panel-grid-3">
+          <article class="card reveal"><span class="kicker">Combat Core</span><h3>元素与伤害系统</h3><ul><li>七元素基础倍率可配置。</li><li>反应倍率、消耗量、持续时间均可表达式化。</li><li>支持元素精通、元素伤害加成与抗性结算。</li></ul></article>
+          <article class="card reveal"><span class="kicker">Party</span><h3>角色编队系统</h3><ul><li>支持 4 槽角色位和当前选中槽。</li><li>角色 GUI 只存角色，不存武器。</li><li>切人后刷新属性、武器状态和面板。</li></ul></article>
+          <article class="card reveal"><span class="kicker">Weapon</span><h3>武器与精炼系统</h3><ul><li>支持武器定义、发放、等级、精炼。</li><li>只检测主手是否为注册武器。</li><li>支持角色切换后记忆武器。</li></ul></article>
+          <article class="card reveal"><span class="kicker">Skill Engine</span><h3>统一技能引擎</h3><ul><li>角色 E/Q 通过统一入口施放。</li><li>近战与弓系逻辑分开实现。</li><li>可由命令或按键桥触发。</li></ul></article>
+          <article class="card reveal"><span class="kicker">Display</span><h3>面板与展示层</h3><ul><li>侧边栏支持多布局模板。</li><li>PlaceholderAPI 可读角色、武器、冷却、粒子、抗性。</li><li>玩家级伤害显示和侧边栏开关会持久化。</li></ul></article>
+          <article class="card reveal"><span class="kicker">Bridge</span><h3>联动与桥接</h3><ul><li>MythicMobs 可按 mobType 桥接怪物抗性。</li><li>ModKeybindBridge 可把客户端按键映射为服务端命令。</li><li>配置支持表达式、变量和部分 PlaceholderAPI 注入。</li></ul></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Battle Flow</div>
+          <h2>战斗链路</h2>
+          <p>插件的反应不是单点 if-else，而是完整流水线。</p>
+        </div>
+        <div class="split-grid">
+          <article class="card reveal">
+            <h3>结算顺序</h3>
+            <div class="step-list">
+              <div class="step"><b>01</b><div><strong>读取属性</strong><p>角色基础属性 + 武器属性/被动 + Lore 属性 + 默认配置。</p></div></div>
+              <div class="step"><b>02</b><div><strong>判定角色模式</strong><p>当前角色存在且主手武器匹配时，进入角色战斗模式。</p></div></div>
+              <div class="step"><b>03</b><div><strong>附着与 ICD</strong><p>按动作组和标准 ICD 规则决定是否挂元素。</p></div></div>
+              <div class="step"><b>04</b><div><strong>反应规划</strong><p>源码会先计算冻结、激化、双元素共存等状态，再决定下一步反应。</p></div></div>
+              <div class="step"><b>05</b><div><strong>反应伤害与状态</strong><p>处理增幅伤害、范围伤害、冻结、燃烧、草原核、护盾与减抗。</p></div></div>
+              <div class="step"><b>06</b><div><strong>展示与保存</strong><p>刷新侧边栏、发送反应文本、更新玩家运行时数据。</p></div></div>
+            </div>
+          </article>
+          <article class="card reveal">
+            <h3>附着与 ICD 默认规则</h3>
+            <ul>
+              <li>标准 ICD 默认开启，时间窗 2500ms，计数窗 3 hit，起始偏移 0。</li>
+              <li>附着强度分为普攻、重击、E、Q、下落攻击五个入口。</li>
+              <li>普通附着持续时间默认 200 tick。</li>
+              <li>冻结、感电、燃烧、扩散和草原核还有各自的附加参数。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Reaction Rules</div>
+          <h2>反应触发规则</h2>
+          <p>下面写的是“怎么触发”，不是只列反应名称。</p>
+        </div>
+        <div class="reaction-matrix">
+          <article class="reaction-item reveal">
+            <strong>蒸发</strong>
+            <p>当目标已有 <strong>火附着</strong>，再用 <strong>水</strong> 攻击，会触发蒸发，并且在当前源码里走更强的一档倍率与更高消耗量。反过来，如果目标已有 <strong>水附着</strong>，再用 <strong>火</strong> 攻击，也会触发蒸发，但走较弱的一档。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>融化</strong>
+            <p>当目标已有 <strong>冰附着</strong>，再用 <strong>火</strong> 攻击，会触发较强一档融化。若目标已有 <strong>火附着</strong>，再用 <strong>冰</strong> 攻击，也会触发融化，但倍率较低。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>超载</strong>
+            <p>火与雷相遇时触发。无论是 <strong>火打雷</strong> 还是 <strong>雷打火</strong>，都可进入超载流程，并在目标周围造成爆炸范围伤害。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>感电</strong>
+            <p><strong>水 + 雷</strong> 互相作用触发。触发后目标会进入持续放电状态，并按配置间隔结算跳电；还可向附近目标传导次级感电。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>冻结</strong>
+            <p><strong>水 + 冰</strong> 互相作用触发。触发后目标进入冻结状态，并同时携带水/冰两种载体。冻结不是纯静态状态，它有独立的衰减模型和碎冰阈值。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>碎冰</strong>
+            <p>在本插件当前源码里，<strong>物理伤害</strong> 或 <strong>岩元素</strong> 打到冻结目标时，满足冻结量阈值即可触发碎冰，造成额外物理伤害。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>超导</strong>
+            <p><strong>冰 + 雷</strong> 互相作用触发。除额外冰伤外，还会对范围内目标施加物理减抗，持续时间和减抗值都在配置里可调。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>原激化 / 超激化 / 蔓激化</strong>
+            <p><strong>雷 + 草</strong> 先触发原激化，使目标进入激化状态。之后如果再吃到 <strong>雷</strong>，会触发超激化；如果再吃到 <strong>草</strong>，会触发蔓激化。源码里激化状态会单独跟踪并优先处理。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>绽放 / 超绽放 / 烈绽放</strong>
+            <p><strong>水 + 草</strong> 先生成草原核。之后若草原核被 <strong>雷</strong> 触发，则进入超绽放，生成追踪型伤害；若被 <strong>火</strong> 触发，则进入烈绽放，造成范围爆炸伤害。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>燃烧</strong>
+            <p><strong>火 + 草</strong> 互相作用触发。目标进入燃烧状态后，会按 tick 周期持续掉血，并继续消耗草附着、刷新火附着，还会向近处扩散燃烧火附着。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>扩散</strong>
+            <p><strong>风</strong> 不能直接扩散所有元素。当前源码只会从目标身上的 <strong>火 / 水 / 雷 / 冰</strong> 四种可扩散元素中选一个主附着进行扩散，并向范围内目标施加扩散伤害与二次附着。</p>
+          </article>
+          <article class="reaction-item reveal">
+            <strong>结晶</strong>
+            <p><strong>岩</strong> 与目标身上的 <strong>火 / 水 / 雷 / 冰</strong> 任一附着反应时触发。会掉落对应元素的结晶碎片，拾取后生成护盾；同元素护盾吸收可按配置获得额外倍率。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Advanced Cases</div>
+          <h2>源码里的优先级与特殊情况</h2>
+          <p>这部分专门解释为什么有时反应看起来不是“简单二选一”。</p>
+        </div>
+        <div class="panel-grid-2">
+          <article class="card reveal">
+            <h3>感电双载体优先级</h3>
+            <ul>
+              <li>若目标同时携带 <strong>水 + 雷</strong>，源码会先把它视为感电载体状态。</li>
+              <li>这时若再吃 <strong>火</strong>，优先从雷这边继续触发超载。</li>
+              <li>若再吃 <strong>冰</strong>，优先从雷这边触发超导。</li>
+              <li>若再吃 <strong>草</strong>，优先从雷这边推进到原激化。</li>
+              <li>若再吃 <strong>风 / 岩</strong>，也会优先围绕雷载体处理扩散 / 结晶。</li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <h3>冻结目标被火命中时</h3>
+            <ul>
+              <li>冻结目标同时带有水和冰两种载体。</li>
+              <li>当前源码会比较两者附着量，决定先走 <strong>融化</strong> 还是先走 <strong>蒸发</strong>。</li>
+              <li>如果冰附着足够突出，会优先先吃冰做融化。</li>
+              <li>如果水附着更占主导，也可能先吃水做蒸发。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <div class="eyebrow">Display & Bridge</div>
+          <h2>展示层与联动能力</h2>
+          <p>功能不止在战斗本体，展示与配置层同样已经成型。</p>
+        </div>
+        <div class="panel-grid-3">
+          <article class="card reveal"><h3>侧边栏系统</h3><ul><li>支持 default / combat / defense 三套布局。</li><li>会自动插入武器信息和最近产球状态。</li><li>可玩家级开关并持久化保存。</li></ul></article>
+          <article class="card reveal"><h3>PlaceholderAPI</h3><ul><li>覆盖角色、武器、冷却、粒子、伤害、抗性。</li><li>适合菜单插件、计分板和展示面板对接。</li></ul></article>
+          <article class="card reveal"><h3>Mod 按键桥</h3><ul><li>默认绑定 1-4 槽切人、E、Q、L。</li><li>支持激活模式、冷却和吞原版按键。</li></ul></article>
+        </div>
+      </section>
+
+      <footer class="card site-footer reveal">
+        <h3>继续阅读</h3>
+        <div class="button-row" style="justify-content:center;">
+          <a class="button secondary" href="wiki-player.html">去看玩家使用教程</a>
+          <a class="button secondary" href="content.html">去看角色与武器资源</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

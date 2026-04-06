@@ -1,0 +1,51 @@
+config-version: '1.0-weapon'
+enabled: true
+
+meta:
+  name: '和璞鸢'
+  weapon-type: 'polearm'
+  material: 'TRIDENT'
+  rarity: 5
+  default-level: 90
+  max-level: 90
+  default-refinement: 1
+  max-refinement: 5
+
+item:
+  material: 'TRIDENT'
+  display-name: '&6{weapon_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神武器'
+    - '&7类型: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7精炼: &f{refinement}'
+    - ''
+    - '&7被动效果: &f{passive_summary}'
+
+stats:
+  base-attack: 674
+  crit-rate: 0.221
+
+passive:
+  id: 'jade_spear_stacks'
+  max-stacks: 7
+  stack-duration-ms: 6000
+  stack-interval-ms: 300
+
+refinements:
+  1:
+    stack-attack-bonus: 0.032
+    full-stack-damage-bonus: 0.12
+  2:
+    stack-attack-bonus: 0.039
+    full-stack-damage-bonus: 0.15
+  3:
+    stack-attack-bonus: 0.046
+    full-stack-damage-bonus: 0.18
+  4:
+    stack-attack-bonus: 0.053
+    full-stack-damage-bonus: 0.21
+  5:
+    stack-attack-bonus: 0.060
+    full-stack-damage-bonus: 0.24

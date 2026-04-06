@@ -1,0 +1,46 @@
+config-version: '1.0-weapon'
+enabled: true
+
+meta:
+  name: '试作古华'
+  weapon-type: 'claymore'
+  material: 'IRON_AXE'
+  rarity: 4
+  default-level: 90
+  max-level: 90
+  default-refinement: 1
+  max-refinement: 5
+
+item:
+  material: 'IRON_AXE'
+  display-name: '&5{weapon_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神武器'
+    - '&7类型: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7精炼: &f{refinement}'
+    - ''
+    - '&7被动效果: &f{passive_summary}'
+
+stats:
+  base-attack: 565
+  attack-percent: 0.276
+
+passive:
+  id: 'aoe_physical_proc'
+  proc-chance: 0.50
+  proc-cooldown-ms: 15000
+  proc-radius: 2.8
+
+refinements:
+  1:
+    proc-damage-multiplier: 2.40
+  2:
+    proc-damage-multiplier: 3.00
+  3:
+    proc-damage-multiplier: 3.60
+  4:
+    proc-damage-multiplier: 4.20
+  5:
+    proc-damage-multiplier: 4.80

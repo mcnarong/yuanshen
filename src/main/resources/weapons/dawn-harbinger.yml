@@ -1,0 +1,44 @@
+config-version: '1.0-weapon'
+enabled: true
+
+meta:
+  name: '黎明神剑'
+  weapon-type: 'sword'
+  material: 'IRON_SWORD'
+  rarity: 3
+  default-level: 90
+  max-level: 90
+  default-refinement: 1
+  max-refinement: 5
+
+item:
+  material: 'IRON_SWORD'
+  display-name: '&b{weapon_name}'
+  custom-model-data: -1
+  lore:
+    - '&8原神武器'
+    - '&7类型: &f{weapon_type}'
+    - '&7等级: &f{level}'
+    - '&7精炼: &f{refinement}'
+    - ''
+    - '&7被动效果: &f{passive_summary}'
+
+stats:
+  base-attack: 401
+  crit-damage: 0.469
+
+passive:
+  id: 'hp_crit_rate'
+  hp-threshold: 0.90
+
+refinements:
+  1:
+    crit-rate-bonus: 0.14
+  2:
+    crit-rate-bonus: 0.175
+  3:
+    crit-rate-bonus: 0.21
+  4:
+    crit-rate-bonus: 0.245
+  5:
+    crit-rate-bonus: 0.28
